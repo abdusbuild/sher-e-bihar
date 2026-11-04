@@ -482,7 +482,8 @@ body.menu-open { overflow: hidden; }
 .hours-row b { color: #fff; font-weight: 500; }
 /* Privacy & Terms: sticky "On this page" list beside a plain document */
 .legal { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: clamp(32px, 5vw, 72px); align-items: start; }
-.legal-toc { position: sticky; top: 104px; max-height: calc(100vh - 124px); overflow-y: auto; border: 1px solid var(--line); border-radius: 4px; padding: 20px 14px; background: var(--surface); }
+.legal-toc { position: sticky; top: 104px; max-height: calc(100vh - 124px); overflow-y: auto; scrollbar-width: none; border: 1px solid var(--line); border-radius: 4px; padding: 20px 14px; background: var(--surface); }
+.legal-toc::-webkit-scrollbar { display: none; }
 .legal-toc h2 { padding-inline: 10px; margin-bottom: 10px; color: var(--navy); font-family: var(--f-body); font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; }
 .legal-toc ol { list-style: none; margin: 0; padding: 0; }
 .legal-toc a { display: block; padding: 7px 10px; border-left: 3px solid transparent; border-radius: 4px; color: var(--muted); font-size: .9rem; line-height: 1.35; transition: background .2s, color .2s; }
