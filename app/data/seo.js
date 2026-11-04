@@ -13,7 +13,7 @@ export const abs = (path) => (path.startsWith("http") ? path : `${siteUrl}${path
 export const ogImage = { url: "/og-image.jpg", width: 1200, height: 630, alt: `${hotel.name} on GT Road, Sherghati` };
 
 export const siteDescription =
-  "Family-run hotel on NH-19 (GT Road) at Akauna, Sherghati, Gaya: clean AC rooms, 24-hour front desk, in-house restaurant and banquet hall. Book direct by phone or WhatsApp.";
+  "Family-run hotel on NH-19 (GT Road), Sherghati, Gaya: clean AC rooms, 24-hour front desk, restaurant and banquet hall. Book direct by phone or WhatsApp.";
 
 const ogBase = { siteName: hotel.name, locale: "en_IN", type: "website" };
 

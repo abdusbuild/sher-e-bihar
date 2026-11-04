@@ -14,6 +14,5 @@ const pages = [
 ];
 
 export default function sitemap() {
-  const lastModified = new Date();
-  return pages.map((p) => ({ url: abs(p.path), lastModified, changeFrequency: p.changeFrequency, priority: p.priority }));
+  return pages.map((p) => ({ url: abs(p.path), changeFrequency: p.changeFrequency, priority: p.priority }));
 }

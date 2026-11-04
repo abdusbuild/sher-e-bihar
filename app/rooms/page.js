@@ -9,7 +9,7 @@ import { hotel, inEveryRoom, rooms } from "../data/site";
 export const metadata = pageMeta({
   title: "AC, Standard & Family Rooms",
   description:
-    "Standard, Deluxe AC and Family rooms at Hotel Sher-e-Bihar, Sherghati: attached bathrooms, hot water, room service, free parking and a 24-hour front desk on NH-19.",
+    "Standard, Deluxe AC and Family rooms at Hotel Sher-e-Bihar, Sherghati: attached bathrooms, hot water, room service, free parking and 24-hour front desk.",
   path: "/rooms",
   image: "/images/room-double-1.jpg",
 });

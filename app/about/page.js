@@ -12,7 +12,7 @@ import { hotel, promises } from "../data/site";
 export const metadata = pageMeta({
   title: "About Our Family-Run Hotel",
   description:
-    "The story of Hotel Sher-e-Bihar, a family-run hotel, restaurant and banquet hall on GT Road at Akauna, Sherghati: clean rooms, honest food and warm Bihari hospitality.",
+    "The story of Hotel Sher-e-Bihar, a family-run hotel, restaurant and banquet hall on GT Road in Sherghati: clean rooms, honest food and warm Bihari hospitality.",
   path: "/about",
   image: "/images/exterior-day.jpg",
 });

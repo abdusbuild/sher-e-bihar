@@ -9,7 +9,7 @@ import { hotel, restaurant } from "../data/site";
 export const metadata = pageMeta({
   title: "Restaurant on GT Road",
   description:
-    "Home-style Indian restaurant on NH-19 at Sherghati: kadhai chicken, dal tadka, paneer, tandoori roti, pakodas and chai. Open to hotel guests, walk-ins and bus groups.",
+    "Home-style Indian restaurant on NH-19 at Sherghati: kadhai chicken, dal tadka, paneer, tandoori roti, pakodas and chai. Open to guests, walk-ins and bus groups.",
   path: "/dining",
   image: "/images/restaurant-hall.jpg",
 });

@@ -1284,8 +1284,15 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .footer { background: #282828; }
 .footer__h { font-family: var(--f-display); font-size: 14px; font-weight: 500; letter-spacing: .14em; }
 .footer__dir { font-family: var(--f-display); }
-.not-found { padding-top: 60px !important; background: var(--sand); }
+.not-found { min-height: calc(100vh - 122px); padding-top: 40px !important; background: var(--sand); }
 .not-found .logo-mark { background: var(--navy); color: #fff; }
+.not-found__inner { max-width: 640px; }
+.not-found__code { color: var(--navy); font-family: var(--f-display); font-size: clamp(5.5rem, 20vw, 10rem); font-weight: 600; line-height: 1; }
+.not-found__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 10px; }
+.not-found__actions a { display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+.not-found__links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; width: 100%; margin-top: 18px; padding-top: 22px; border-top: 1px solid var(--line); }
+.not-found__links a { color: var(--navy); font-weight: 600; }
+.not-found__links a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .legal-toc a.is-active { border-left-color: var(--navy); background: rgba(33, 21, 81, .06); }
 .legal-section li::marker { color: var(--navy); }
 .ph { background: var(--sand); color: var(--navy); border-color: var(--line); }

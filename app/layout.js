@@ -15,7 +15,7 @@ const josefin = Josefin_Sans({ subsets: ["latin"], variable: "--font-josefin" })
 export const metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${hotel.name} Sherghati | Hotel, Restaurant & Banquet on GT Road`,
+    default: `${hotel.name}, Sherghati | Hotel, Restaurant & Banquet`,
     template: `%s | ${hotel.name} Sherghati`,
   },
   description: siteDescription,

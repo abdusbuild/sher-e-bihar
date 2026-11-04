@@ -5,7 +5,7 @@ import Faq from "../components/Faq";
 import { faqs } from "../data/site";
 
 export const metadata = pageMeta({
-  title: "FAQs: Booking, Check-in & Location",
+  title: "FAQs: Booking & Check-in",
   description:
     "Answers about booking, check-in times, ID, parking, AC rooms, food, banquet bookings and how to reach Hotel Sher-e-Bihar on GT Road, Sherghati.",
   path: "/faq",
