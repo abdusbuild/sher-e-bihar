@@ -1,6 +1,5 @@
 import { hotel, reach, rooms } from "../data/site";
 import Icon from "./Icon";
-import { ReceptionBell } from "./Illustrations";
 import Title from "./Title";
 
 // Short call-to-action shown on the phone home page only.
@@ -85,7 +84,6 @@ export default function Contact({ map = false }) {
                 </a>
               </div>
             </div>
-            <ReceptionBell />
           </div>
 
           <form data-enquiry noValidate>

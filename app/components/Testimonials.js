@@ -23,7 +23,7 @@ function Stars({ value = 5, small = false }) {
 // Guest testimonials slider (reference design). Reviews are real Google reviews from site.js.
 export default function Testimonials() {
   return (
-    <section className="section glow-band" id="reviews">
+    <section className="section band--sand" id="reviews">
       <div className="wrap">
         <Title sub="Hear what our guests say about staying and dining with us.">Guest Testimonials</Title>
 

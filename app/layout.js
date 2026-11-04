@@ -1,4 +1,4 @@
-import { Funnel_Display, Inter } from "next/font/google";
+import { Josefin_Sans, Noto_Sans_Display } from "next/font/google";
 import "./globals.css";
 import { hotel } from "./data/site";
 import Navbar from "./components/Navbar";
@@ -9,8 +9,8 @@ import SiteScripts from "./components/SiteScripts";
 import JsonLd from "./components/JsonLd";
 import { ogImage, siteDescription, siteJsonLd, siteUrl } from "./data/seo";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const funnel = Funnel_Display({ subsets: ["latin"], variable: "--font-funnel" });
+const noto = Noto_Sans_Display({ subsets: ["latin"], variable: "--font-noto" });
+const josefin = Josefin_Sans({ subsets: ["latin"], variable: "--font-josefin" });
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -64,22 +64,16 @@ export const metadata = {
   },
 };
 
-export const viewport = { themeColor: "#000000" };
+export const viewport = { themeColor: "#211551" };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-IN" className={`${inter.variable} ${funnel.variable}`}>
+    <html lang="en-IN" className={`${noto.variable} ${josefin.variable}`}>
       <body>
         <noscript>
-          <style>{`.loader{display:none}body{overflow:auto}.reveal{opacity:1!important;transform:none!important}`}</style>
+          <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <JsonLd data={siteJsonLd} />
-        <div className="loader" aria-hidden="true">
-          <div className="loader__logo">
-            <span className="logo-mark">{hotel.logoMark}</span>
-            <div className="loader__spin" />
-          </div>
-        </div>
         <Navbar />
         <main>{children}</main>
         <Footer />

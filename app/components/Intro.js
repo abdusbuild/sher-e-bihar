@@ -1,31 +1,16 @@
 import Link from "next/link";
-import { highlights, hotel, photos } from "../data/site";
+import { heroStats, hotel } from "../data/site";
 import Icon from "./Icon";
 import Photo from "./Photo";
 
-export function MarqueeRow({ items, reverse }) {
-  // Items are rendered twice so the -50% marquee loop is seamless.
-  return (
-    <div className={`img-marquee__row ${reverse ? "img-marquee__row--rev" : ""}`}>
-      {[...items, ...items].map((p, i) => (
-        <Photo key={i} src={p.src} alt={p.alt} sizes="360px" />
-      ))}
-    </div>
-  );
-}
-
+// Opening block of the home page: holds the page's <h1>, with a photo in the arch shape.
 export default function Intro() {
-  const half = Math.ceil(photos.length / 2);
-  const rowB = [...photos.slice(half), ...photos.slice(0, half)];
   return (
     <section className="section">
       <div className="wrap intro">
-        <div className="reveal" style={{ "--y": "18px" }}>
-          <h2>
-            We Provide <span className="text-amber">Comfortable</span>
-            <br />
-            Stays, Food &amp; Celebrations
-          </h2>
+        <div className="reveal">
+          <span className="kicker">Welcome to {hotel.name}</span>
+          <h1>Comfort on the GT Road, with taste &amp; celebration under one roof</h1>
           <p>
             {hotel.name} stands right on the GT Road (NH-19) at Akauna, Sherghati — an easy stop between Gaya, Bodh
             Gaya, Dobhi and Aurangabad, with plenty of space to park and rest.
@@ -34,31 +19,20 @@ export default function Intro() {
             We welcome families, pilgrims bound for Bodh Gaya and Gaya, wedding parties and highway travellers with
             clean rooms, fresh home-style food and a banquet hall for your celebrations.
           </p>
-          {/* Phones only: stands in for the hidden "We Are Perfect For" section */}
-          <ul className="check-list show-phone">
-            {highlights.map((h) => (
-              <li key={h}>
-                <Icon name="check" />
-                {h}
-              </li>
+          <div className="intro-stats">
+            {heroStats.map((s) => (
+              <div key={s.label} className="stat-big">
+                <b>{s.text}</b>
+                <span>{s.label}</span>
+              </div>
             ))}
-          </ul>
-          <Link href="/about" className="btn-black">
-            About Us
+          </div>
+          <Link href="/about" className="arrow-link">
+            About Us <Icon name="arrow" />
           </Link>
         </div>
-        <div className="img-marquee reveal" style={{ "--d": ".15s" }}>
-          <MarqueeRow items={photos} />
-          <MarqueeRow items={rowB} reverse />
-        </div>
-        {/* Phones only: stands in for the hidden "Inside The Hotel" section */}
-        <div className="center show-phone">
-          <Link href="/gallery" className="btn-gradient">
-            <Icon name="camera" /> View Gallery
-            <span className="arrow">
-              <Icon name="arrow" />
-            </span>
-          </Link>
+        <div className="arch reveal" style={{ "--d": ".15s" }}>
+          <Photo src="/images/exterior-night.jpg" alt="Hotel Sher-e-Bihar lit up at night" sizes="(max-width: 860px) 90vw, 440px" />
         </div>
       </div>
     </section>

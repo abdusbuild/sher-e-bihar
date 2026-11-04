@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { banquet } from "../data/site";
 import Icon from "./Icon";
+import Photo from "./Photo";
 import Title from "./Title";
 
 function Cards({ items }) {
@@ -28,8 +29,40 @@ export function EnquireEvent() {
   );
 }
 
+// Home page: two alternating photo and text rows that lead to /banquet.
+function BanquetTeaser() {
+  const rows = [
+    { event: banquet.events[0], src: "/images/banquet-hall-1.jpg", alt: "Banquet hall seating with decorated stage" },
+    { event: banquet.events[1], src: "/images/banquet-stage-heart.jpg", alt: "Floral heart stage" },
+  ];
+  return (
+    <section className="section">
+      <div className="wrap">
+        <Title sub={banquet.text}>Weddings &amp; Celebrations</Title>
+        <div className="rows">
+          {rows.map(({ event, src, alt }, i) => (
+            <div key={event.title} className={`media-split ${i % 2 ? "media-split--rev" : ""}`}>
+              <div className="reveal">
+                <h3 className="subhead">{event.title}</h3>
+                <p>{event.text}</p>
+                <Link href="/banquet" className="arrow-link">
+                  View Details <Icon name="arrow" />
+                </Link>
+              </div>
+              <div className="media-split__img reveal" style={{ "--d": ".15s" }}>
+                <Photo src={src} alt={alt} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // Banquet events section. On the home page it links to /banquet.
 export default function Banquet({ teaser = false }) {
+  if (teaser) return <BanquetTeaser />;
   return (
     <section className="section">
       <div className="wrap">
@@ -37,16 +70,7 @@ export default function Banquet({ teaser = false }) {
         <Cards items={banquet.events} />
         <div className="center reveal btns-center" style={{ marginTop: 34 }}>
           {banquet.capacity && <p className="small-note">Capacity: {banquet.capacity}</p>}
-          {teaser ? (
-            <Link href="/banquet" className="btn-gradient">
-              Explore Banquet
-              <span className="arrow">
-                <Icon name="arrow" />
-              </span>
-            </Link>
-          ) : (
-            <EnquireEvent />
-          )}
+          <EnquireEvent />
         </div>
       </div>
     </section>

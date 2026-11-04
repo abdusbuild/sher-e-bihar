@@ -1,14 +1,15 @@
 import Hero from "./components/Hero";
 import BookingBar from "./components/BookingBar";
 import Intro from "./components/Intro";
-import PerfectFor from "./components/PerfectFor";
 import Rooms from "./components/Rooms";
+import BookDirect from "./components/BookDirect";
+import Gallery from "./components/Gallery";
 import Restaurant from "./components/Restaurant";
 import Banquet from "./components/Banquet";
 import WhyUs from "./components/WhyUs";
-import Gallery from "./components/Gallery";
-import Testimonials from "./components/Testimonials";
+import GettingHere from "./components/GettingHere";
 import Nearby from "./components/Nearby";
+import Testimonials from "./components/Testimonials";
 import { ContactCta } from "./components/Contact";
 import HomeFaq from "./components/HomeFaq";
 import { hotel } from "./data/site";
@@ -26,14 +27,15 @@ export default function Home() {
       <Hero />
       <BookingBar />
       <Intro />
-      <PerfectFor style={{ paddingTop: 0 }} className="hide-phone" />
       <Rooms />
+      <BookDirect />
+      <Gallery />
       <Restaurant teaser />
       <Banquet teaser />
       <WhyUs />
-      <Gallery />
-      <Testimonials />
+      <GettingHere />
       <Nearby />
+      <Testimonials />
       <HomeFaq />
       <ContactCta />
     </div>

@@ -16,7 +16,7 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={breadcrumbLd("Contact Us", "/contact")} />
-      <PageHero title="Contact Us" sub="We're here for you 24 hours a day" image="/images/exterior-dusk.jpg" />
+      <PageHero title="Contact Us" sub="We're here for you 24 hours a day" image="/images/exterior-day.jpg" />
       <Contact map />
       <Reach />
       <Nearby />

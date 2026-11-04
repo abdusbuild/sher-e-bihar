@@ -95,7 +95,7 @@ export const menuHighlights = [
 export const heroImages = ["/images/exterior-dusk.jpg", "/images/room-double-1.jpg", "/images/banquet-hall-2.jpg", "/images/restaurant-hall.jpg"];
 
 export const heroStats = [
-  { count: "437", label: "Google reviews" },
+  { text: "437", label: "Google reviews" },
   { text: "24/7", label: "Open all day" },
   { text: "NH-19", label: "On GT Road" },
 ];

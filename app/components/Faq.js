@@ -1,8 +1,7 @@
 import { faqGroups, faqs, hotel } from "../data/site";
 import Icon from "./Icon";
-import { ThinkingGuest } from "./Illustrations";
 
-// FAQ page: grouped questions (pill tabs) and a guest illustration.
+// FAQ page: grouped questions (pill tabs).
 export default function Faq() {
   return (
     <section className="section">
@@ -21,7 +20,6 @@ export default function Faq() {
         </div>
         <div className="faq-grid">
           <aside className="faq-aside reveal reveal--left">
-            <ThinkingGuest />
             <p className="faq-aside__text">Still have a question?</p>
             <div className="btns">
               <a href={`https://wa.me/${hotel.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-gradient">

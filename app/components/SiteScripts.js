@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { hotel } from "../data/site";
 
-// Site-wide interactions and motion (loader, navbar, reveal, counters, marquees,
+// Site-wide interactions and motion (navbar, reveal, carousels, marquees,
 // rotator, tabs/filters, slider, accordion, lightbox, enquire panel, popup,
 // WhatsApp enquiry forms). Re-runs on every page change.
 export default function SiteScripts() {
@@ -30,26 +30,14 @@ export default function SiteScripts() {
       cleanups.push(() => clearInterval(t));
     };
 
-    /* Loader (first load only) */
-    const loader = $(".loader");
-    if (loader && !loader.classList.contains("is-done")) {
-      const finish = () => later(() => loader.classList.add("is-done"), 500);
-      if (document.readyState === "complete") finish();
-      else on(window, "load", finish);
-    }
-
-    /* Navbar: hide on scroll down, show on scroll up */
+    /* Navbar: adds a shadow once the page has scrolled. The Enquire button waits until the booking bar has passed. */
     const nav = $(".navbar");
-    let lastY = window.scrollY;
     const onScroll = () => {
-      const y = window.scrollY;
-      nav.classList.toggle("is-scrolled", y > 30);
-      nav.classList.toggle("is-hidden", y > 120 && y > lastY && !body.classList.contains("menu-open"));
-      lastY = y;
+      nav.classList.toggle("is-scrolled", window.scrollY > 30);
+      body.classList.toggle("is-past-fold", window.scrollY > 360);
     };
     onScroll();
     on(window, "scroll", onScroll, { passive: true });
-    $$(".nav-pill a").forEach((a, i) => (a.style.animationDelay = `${0.3 + i * 0.1}s`));
 
     /* Mobile menu */
     const menuBtn = $(".menu-btn");
@@ -87,97 +75,69 @@ export default function SiteScripts() {
       revealEls.forEach((el) => el.classList.add("is-in"));
     }
 
-    /* Big headings: letters fade from faint to solid as the heading scrolls up the screen */
-    if (!reduceMotion) {
-      const clamp01 = (v) => Math.min(1, Math.max(0, v));
-      const scrubs = $$(".title h2, .intro h2, .perks h2, .contact-title h2, .room-detail h2").map((el) => {
-        const original = el.innerHTML;
-        const chars = [];
-        const split = (node) => {
-          Array.from(node.childNodes).forEach((n) => {
-            if (n.nodeType === 1) return split(n);
-            if (n.nodeType !== 3) return;
-            const frag = document.createDocumentFragment();
-            n.textContent.split(/(\s+)/).forEach((part) => {
-              if (!part) return;
-              if (!part.trim()) return frag.append(" ");
-              // Letters sit inside a word wrapper so a line can't break mid-word
-              const word = document.createElement("span");
-              word.className = "sw";
-              Array.from(part).forEach((c) => {
-                const s = document.createElement("span");
-                s.textContent = c;
-                word.append(s);
-                chars.push(s);
-              });
-              frag.append(word);
-            });
-            n.replaceWith(frag);
-          });
+    /* Peek carousels: arrows and "1 / 3" counter. Swiping is native scroll-snap. */
+    $$("[data-peek]").forEach((root) => {
+      const track = $(".peek__track", root);
+      const slides = $$(".peek__slide", root);
+      const count = $("[data-peek-count]", root);
+      const padLeft = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
+      let idx = 0;
+      let raf = 0;
+      let moving = false;
+      const paint = () => {
+        if (moving) return; // the counter already shows where the row is heading
+        const x = track.scrollLeft + padLeft();
+        // The last slide can't reach the snap line (nothing follows it), so the end of the row counts as last
+        const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
+        idx = atEnd
+          ? slides.length - 1
+          : slides.reduce((best, s, i) => (Math.abs(s.offsetLeft - x) < Math.abs(slides[best].offsetLeft - x) ? i : best), 0);
+        count.textContent = `${idx + 1} / ${slides.length}`;
+      };
+      const settle = () => {
+        cancelAnimationFrame(raf);
+        moving = false;
+        track.style.scrollSnapType = "";
+      };
+      // Arrows glide over 1.2s with an ease-in-out curve. Snap is off during the glide or it would fight the movement.
+      const go = (n) => {
+        idx = (n + slides.length) % slides.length;
+        const to = Math.min(slides[idx].offsetLeft - padLeft(), track.scrollWidth - track.clientWidth);
+        if (reduceMotion) {
+          track.scrollLeft = to;
+          return;
+        }
+        settle();
+        moving = true;
+        track.style.scrollSnapType = "none";
+        count.textContent = `${idx + 1} / ${slides.length}`;
+        const from = track.scrollLeft;
+        const start = performance.now();
+        const step = (now) => {
+          const p = Math.min(1, (now - start) / 1200);
+          const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          track.scrollLeft = from + (to - from) * eased;
+          if (p < 1) raf = requestAnimationFrame(step);
+          else {
+            settle();
+            paint();
+          }
         };
-        // Read as a sentence, not letter by letter. innerText keeps the gap at a <br>; textContent would not.
-        el.setAttribute("aria-label", el.innerText.replace(/\s+/g, " ").trim());
-        split(el);
-        cleanups.push(() => {
-          el.innerHTML = original;
-          el.removeAttribute("aria-label");
-        });
-        return { el, chars, p: -1 };
-      });
-      if (scrubs.length) {
-        let raf = 0;
-        const paint = () => {
-          raf = 0;
-          const vh = window.innerHeight;
-          // The last headings may never reach the trigger line, so finish them at the page end
-          const atEnd = window.scrollY + vh >= document.documentElement.scrollHeight - 4;
-          scrubs.forEach((it) => {
-            const p = atEnd ? 1 : clamp01((vh * 0.92 - it.el.getBoundingClientRect().top) / (vh * 0.42));
-            if (p === it.p) return;
-            it.p = p;
-            const n = it.chars.length;
-            const spread = Math.max(6, n * 0.25);
-            it.chars.forEach((s, i) => {
-              s.style.opacity = (0.14 + 0.86 * clamp01((p * (n + spread) - i) / spread)).toFixed(2);
-            });
-          });
-        };
-        const queue = () => {
-          if (!raf) raf = requestAnimationFrame(paint);
-        };
+        raf = requestAnimationFrame(step);
+      };
+      cleanups.push(settle);
+      // A finger on the row takes over from the glide
+      on(track, "pointerdown", () => {
+        if (!moving) return;
+        settle();
         paint();
-        on(window, "scroll", queue, { passive: true });
-        on(window, "resize", queue);
-        cleanups.push(() => cancelAnimationFrame(raf));
-      }
-    }
-
-    /* Count-up numbers */
-    const cio = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          cio.unobserve(e.target);
-          const el = e.target;
-          const raw = el.getAttribute("data-count");
-          const end = parseFloat(raw);
-          const dec = (raw.split(".")[1] || "").length;
-          const suf = el.getAttribute("data-suffix") || "";
-          if (reduceMotion) return;
-          let t0 = null;
-          const step = (t) => {
-            if (!t0) t0 = t;
-            const p = Math.min(1, (t - t0) / 1600);
-            el.textContent = (end * (1 - Math.pow(1 - p, 3))).toFixed(dec) + suf;
-            if (p < 1) requestAnimationFrame(step);
-          };
-          requestAnimationFrame(step);
-        });
-      },
-      { threshold: 0.5 }
-    );
-    $$("[data-count]").forEach((c) => cio.observe(c));
-    cleanups.push(() => cio.disconnect());
+      });
+      on(track, "scroll", paint, { passive: true });
+      on(window, "resize", paint);
+      on($("[data-peek-prev]", root), "click", () => go(idx - 1));
+      on($("[data-peek-next]", root), "click", () => go(idx + 1));
+      paint();
+    });
 
     /* Hero background crossfade */
     const heroImgs = $$(".hero__bg img");
@@ -338,7 +298,7 @@ export default function SiteScripts() {
       const lbImg = $("img", lb);
       const lbCap = $(".lightbox__cap", lb);
       const lbCount = $(".lightbox__count", lb);
-      const zoomable = "[data-lightbox], .img-marquee img, .media-split__img img, .showcase__img img, .room-detail__tile img";
+      const zoomable = "[data-lightbox], .img-marquee img, .media-split__img img, .showcase__img img, .room-detail__tile img, .peek__img img, .dine__img img, .arch img";
       const srcOf = (el) => el.getAttribute("href") || el.dataset.full || el.currentSrc || el.getAttribute("src");
       const capOf = (el) => el.getAttribute("data-caption") || el.getAttribute("alt") || "";
       // Gallery links count once (not the <img> inside them); filtered-out gallery items are skipped.
@@ -563,23 +523,6 @@ export default function SiteScripts() {
         openModal(b.getAttribute("data-room"));
       })
     );
-    let shown = false;
-    try {
-      shown = sessionStorage.getItem("sb-popup") === "1";
-    } catch {}
-    if (!shown) {
-      later(() => {
-        if (body.classList.contains("menu-open") || modal.classList.contains("is-open")) return;
-        if (document.querySelector(".lightbox.is-open")) return;
-        try {
-          if (sessionStorage.getItem("sb-popup") === "1") return;
-        } catch {}
-        openModal();
-        try {
-          sessionStorage.setItem("sb-popup", "1");
-        } catch {}
-      }, 9000);
-    }
 
     /* Home booking bar → copies dates / guests / room into the enquiry popup */
     const booking = $("form[data-booking]");

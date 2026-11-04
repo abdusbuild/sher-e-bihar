@@ -17,20 +17,35 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar" aria-label="Main">
+      {/* Solid bar that stays on screen: menu on the left, logo centred, booking on the right */}
+      <header className="navbar">
         <div className="navbar__inner">
-          <Logo />
-          <div className="nav-pill glass-morphism">
-            {navLinks.map((l) => (
-              <Link key={l.href} href={l.href} aria-current={current(l.href)}>
-                {l.label}
-              </Link>
-            ))}
+          <div className="navbar__side">
+            <button className="menu-btn" aria-label="Open menu" aria-expanded="false">
+              <Icon name="menu" />
+            </button>
+            <span className="navbar__place">{hotel.shortAddress}</span>
           </div>
-          <button className="menu-btn glass-morphism" aria-label="Open menu" aria-expanded="false">
-            <Icon name="menu" />
-          </button>
+          <Logo />
+          <div className="navbar__side navbar__side--end">
+            <a href={`tel:${hotel.phoneTel}`} className="navbar__call">
+              <Icon name="phone" />
+              {hotel.phoneDisplay}
+            </a>
+            <a href="#" className="navbar__book" data-open-modal>
+              Book
+            </a>
+          </div>
         </div>
+      </header>
+
+      {/* Page links scroll away with the page; the menu button covers them after that */}
+      <nav className="nav-pill" aria-label="Main">
+        {navLinks.map((l) => (
+          <Link key={l.href} href={l.href} aria-current={current(l.href)}>
+            {l.label}
+          </Link>
+        ))}
       </nav>
 
       <div className="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">

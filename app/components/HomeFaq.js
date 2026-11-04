@@ -2,9 +2,8 @@ import Link from "next/link";
 import { faqs, hotel } from "../data/site";
 import Icon from "./Icon";
 import Title from "./Title";
-import { ThinkingGuest } from "./Illustrations";
 
-// Homepage FAQ teaser: illustration + the `featured` questions, linking to the full FAQ page.
+// Homepage FAQ teaser: the `featured` questions, linking to the full FAQ page.
 export default function HomeFaq() {
   const featured = faqs.filter((f) => f.featured);
   return (
@@ -13,7 +12,6 @@ export default function HomeFaq() {
         <Title sub="Quick answers before you plan your stay, meal or celebration.">Frequently Asked Questions</Title>
         <div className="faq-grid">
           <aside className="faq-aside reveal reveal--left">
-            <ThinkingGuest />
             <p className="faq-aside__text">Have more questions?</p>
             <div className="btns">
               <Link href="/faq" className="btn-gradient">

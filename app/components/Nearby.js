@@ -1,19 +1,23 @@
 import { nearby } from "../data/site";
-import Title from "./Title";
 
+// Title on the left over a large arch shape, list of places with distances on the right.
 export default function Nearby() {
   return (
-    <section className="section--tight band-light">
-      <Title sub="Approximate road distances from the hotel">Places Near Us</Title>
-      <div className="text-marquee">
-        <div className="text-marquee__track">
-          {[...nearby, ...nearby, ...nearby].map((n, i) => (
-            <div key={i} className="text-marquee__item" aria-hidden={i >= nearby.length || undefined}>
+    <section className="section places-band">
+      <span className="places__deco" aria-hidden="true" />
+      <div className="wrap places">
+        <div className="reveal">
+          <h2>Places Near Us</h2>
+          <p>Approximate road distances from the hotel</p>
+        </div>
+        <ul className="places__list reveal" style={{ "--d": ".1s" }}>
+          {nearby.map((n) => (
+            <li key={n.name}>
               <b>{n.name}</b>
               <span>{n.distance}</span>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </section>
   );
