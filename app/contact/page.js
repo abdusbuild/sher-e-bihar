@@ -9,7 +9,7 @@ export const metadata = pageMeta({
   description:
     "Call or WhatsApp +91 62905 00076. Find Hotel Sher-e-Bihar on NH-19 (GT Road) at Akauna, Sherghati, Gaya, Bihar 824211, about 35 km from Bodh Gaya.",
   path: "/contact",
-  image: "/images/exterior-dusk.jpg",
+  image: "/og/contact.jpg",
 });
 
 export default function ContactPage() {

@@ -10,7 +10,9 @@ export const siteUrl = (
 
 export const abs = (path) => (path.startsWith("http") ? path : `${siteUrl}${path}`);
 
-export const ogImage = { url: "/og-image.jpg", width: 1200, height: 630, alt: `${hotel.name} on GT Road, Sherghati` };
+// Link-preview cards live in public/og (all 1200x630, under 300 KB so WhatsApp shows them). Rebuild with scripts/share-assets.py.
+const shareCard = (url, alt) => ({ url, width: 1200, height: 630, type: "image/jpeg", alt });
+export const ogImage = shareCard("/og/home.jpg", `${hotel.name} on GT Road, Sherghati`);
 
 export const siteDescription =
   "Family-run hotel on NH-19 (GT Road), Sherghati, Gaya: clean AC rooms, 24-hour front desk, restaurant and banquet hall. Book direct by phone or WhatsApp.";
@@ -19,14 +21,14 @@ const ogBase = { siteName: hotel.name, locale: "en_IN", type: "website" };
 
 // Metadata for one page: title, description, canonical URL and social share cards.
 export function pageMeta({ title, description, path, image, socialTitle }) {
-  const images = image ? [{ url: image, alt: title }] : [ogImage];
+  const images = [image ? shareCard(image, `${title}, ${hotel.name}, Sherghati`) : ogImage];
   const shareTitle = socialTitle || (title ? `${title} | ${hotel.name}` : undefined);
   return {
     ...(title && { title }),
     description,
     alternates: { canonical: path },
     openGraph: { ...ogBase, ...(shareTitle && { title: shareTitle }), description, url: path, images },
-    twitter: { card: "summary_large_image", ...(shareTitle && { title: shareTitle }), description, images: images.map((i) => i.url) },
+    twitter: { card: "summary_large_image", ...(shareTitle && { title: shareTitle }), description, images },
   };
 }
 
@@ -82,8 +84,8 @@ export const siteJsonLd = {
       url: abs("/"),
       telephone: hotel.phoneTel,
       ...(hotel.email && { email: hotel.email }),
-      logo: abs("/icon.svg"),
-      image: ["/og-image.jpg", "/images/exterior-dusk.jpg", "/images/exterior-day.jpg", "/images/room-double-1.jpg", "/images/banquet-hall-2.jpg", "/images/restaurant-hall.jpg"].map(abs),
+      logo: abs("/icons/icon-512.png"),
+      image: ["/images/exterior-dusk.jpg", "/images/exterior-day.jpg", "/images/room-double-1.jpg", "/images/banquet-hall-2.jpg", "/images/restaurant-hall.jpg"].map(abs),
       address,
       geo,
       hasMap: hotel.mapLink,

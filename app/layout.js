@@ -20,6 +20,11 @@ export const metadata = {
   },
   description: siteDescription,
   applicationName: hotel.name,
+  appleWebApp: { title: "Sher-e-Bihar" },
+  icons: {
+    icon: [{ url: "/icon.svg", type: "image/svg+xml", sizes: "any" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   keywords: [
     "Hotel Sher-e-Bihar",
     "Hotel Shere Bihar",
@@ -46,7 +51,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `${hotel.name} | Sherghati, Gaya`,
     description: siteDescription,
-    images: [ogImage.url],
+    images: [ogImage],
   },
   robots: {
     index: true,

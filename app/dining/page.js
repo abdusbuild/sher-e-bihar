@@ -11,7 +11,7 @@ export const metadata = pageMeta({
   description:
     "Home-style Indian restaurant on NH-19 at Sherghati: kadhai chicken, dal tadka, paneer, tandoori roti, pakodas and chai. Open to guests, walk-ins and bus groups.",
   path: "/dining",
-  image: "/images/restaurant-hall.jpg",
+  image: "/og/dining.jpg",
 });
 
 export default function Dining() {

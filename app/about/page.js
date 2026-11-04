@@ -14,7 +14,7 @@ export const metadata = pageMeta({
   description:
     "The story of Hotel Sher-e-Bihar, a family-run hotel, restaurant and banquet hall on GT Road in Sherghati: clean rooms, honest food and warm Bihari hospitality.",
   path: "/about",
-  image: "/images/exterior-day.jpg",
+  image: "/og/about.jpg",
 });
 
 export default function About() {

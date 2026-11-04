@@ -9,7 +9,7 @@ export const metadata = pageMeta({
   description:
     "Photos of Hotel Sher-e-Bihar, Sherghati: the building on GT Road, our rooms, restaurant and decorated banquet hall.",
   path: "/gallery",
-  image: "/images/banquet-hall-1.jpg",
+  image: "/og/gallery.jpg",
 });
 
 export default function GalleryPage() {

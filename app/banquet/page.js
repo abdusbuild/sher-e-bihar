@@ -12,7 +12,7 @@ export const metadata = pageMeta({
   description:
     "Book our banquet hall in Sherghati for weddings, receptions, tilak, birthdays and corporate events, with in-house catering, décor help and rooms for guests.",
   path: "/banquet",
-  image: "/images/banquet-hall-2.jpg",
+  image: "/og/banquet.jpg",
 });
 
 export default function BanquetPage() {
