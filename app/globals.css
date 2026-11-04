@@ -830,6 +830,7 @@ section[id] { scroll-margin-top: 110px; }
 .footer .socials-round .ico { color: currentColor; width: 18px; height: 18px; }
 .footer__bottom { color: #99a1af; }
 .footer__bottom a { color: var(--gold); }
+.footer__cols li a:hover, .footer__dir:hover, .footer__bottom a:hover { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
 
 /* Footer accordion: plain headings on desktop, collapsible on mobile */
 .footer__acc-btn { all: unset; display: flex; align-items: center; justify-content: space-between; width: 100%; cursor: default; pointer-events: none; }
@@ -1109,7 +1110,7 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .nav-pill a { padding: 15px 8px 12px; color: var(--ink); font-family: var(--f-display); font-size: 15px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; opacity: 1; animation: none; border-radius: 0; }
 .nav-pill a:hover { transform: none; color: var(--navy); }
 .nav-pill a[aria-current="page"] { color: var(--navy); }
-.nav-pill a::after { bottom: 7px; height: 1px; background: var(--navy); }
+.nav-pill a::after { bottom: 7px; height: 3px; background: var(--navy); }
 
 /* Drawer */
 .mobile-menu { background: linear-gradient(165deg, var(--navy), var(--navy-900)); }
