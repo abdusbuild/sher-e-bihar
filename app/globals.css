@@ -914,3 +914,151 @@ body:has(.not-found) .navbar { background: rgba(0, 0, 0, .82); backdrop-filter: 
   .booking__form, .perks__grid { grid-template-columns: 1fr; }
 }
 
+/* ---------- Phone: swipe rows instead of tall stacks ----------
+   Card grids and the why-us perks become horizontal scroll-snap rows on
+   small screens (next card peeks in as a swipe hint), and the duplicate
+   second photo-marquee row is dropped, to cut down vertical scrolling. */
+@media (max-width: 600px) {
+  .cards:not(.cards--stack),
+  .perks__grid {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--pad);
+    padding: 6px var(--pad) 18px;
+    margin-inline: calc(var(--pad) * -1);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  .cards:not(.cards--stack)::-webkit-scrollbar,
+  .perks__grid::-webkit-scrollbar { display: none; }
+  .cards:not(.cards--stack) > .card {
+    flex: 0 0 84%;
+    scroll-snap-align: start;
+    padding: 24px 16px;
+  }
+
+  /* Perks sit inside a padded photo band, so bleed to the band's edges */
+  .perks { padding-inline: 14px; }
+  .perks__grid { --pad: 14px; margin-top: 30px; margin-bottom: 26px; }
+  .perk { flex: 0 0 62%; scroll-snap-align: start; }
+  .perk p { display: block; }
+  .perk h3 { font-size: 1rem; }
+
+  /* Short highlight list fits two-up */
+  .media-split .check-list { grid-template-columns: 1fr 1fr; gap: 10px 14px; font-size: .92rem; }
+
+  /* One photo strip is enough on a phone */
+  .img-marquee .img-marquee__row--rev { display: none; }
+}
+
+/* ---------- Phone: shorter home page ----------
+   hide-phone / show-phone swap whole blocks at the phone breakpoint.
+   Everything else here only tightens the home page on small screens. */
+@media (min-width: 601px) {
+  .show-phone { display: none !important; }
+}
+@media (max-width: 600px) {
+  .hide-phone { display: none !important; }
+
+  .home .section { padding-block: 22px; }
+
+  .home .intro { gap: 22px; }
+  .home .intro .check-list { grid-template-columns: 1fr 1fr; gap: 10px 14px; margin-bottom: 20px; font-size: .92rem; }
+
+  /* Room text is clipped here; the Details button leads to the full version */
+  .showcase__body p {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+  }
+
+  /* FAQ: first four questions and the "see all" link */
+  .home-faq .faq-aside { display: none; }
+  .home-faq .acc:nth-of-type(n + 5) { display: none; }
+
+  .contact-cta__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .contact-cta__btns a { width: 100%; min-height: 48px; padding: 12px 8px; gap: 8px; }
+  .contact-cta__btns .ico { width: 18px; height: 18px; flex: none; }
+}
+
+/* ---------- Phone: narrower side spacing, all pages ----------
+   A smaller page gutter, plus less padding inside cards so text uses the width. */
+@media (max-width: 600px) {
+  :root { --pad: 12px; }
+
+  /* .title adds its own gutter for full-bleed sections; inside .wrap it doubled up */
+  .wrap .title { padding-inline: 0; }
+
+  .showcase__body,
+  .contact-box__info,
+  .contact-box form,
+  .dining-info__box { padding-inline: 16px; }
+
+  .booking__form { padding-inline: 12px; }
+
+  .acc__q { padding-inline: 14px; gap: 10px; }
+  .acc__a p { padding-inline: 14px; }
+
+  /* Testimonials: full-width card, with the arrows moved underneath it */
+  .testi { padding: 0 0 52px; }
+  .testi-card { padding: 0; }
+  .testi-card__inner { padding-inline: 16px; }
+  .testi__btn { top: auto; bottom: 0; }
+  .testi__prev { left: calc(50% - 46px); }
+  .testi__next { right: calc(50% - 46px); }
+}
+
+/* ---------- Scroll reveal directions ----------
+   Text blocks slide in from the left, images from the right, on a long soft ease.
+   Everything else (cards, titles, buttons) keeps the base .reveal rise.
+   The script only adds .is-in, so the offsets are set on :not(.is-in). */
+:root { --rv-x: 100px; }
+@media (max-width: 600px) {
+  :root { --rv-x: 44px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .reveal:is(.reveal--left, .intro > :not(.img-marquee), .media-split > :not(.media-split__img), .room-detail > :not(.room-detail__media), .promise > *),
+  .reveal:is(.media-split__img, .room-detail__media, .img-marquee, .map-frame) {
+    transition: opacity 1.1s cubic-bezier(.22, 1, .36, 1), transform 1.1s cubic-bezier(.22, 1, .36, 1);
+    transition-delay: var(--d, 0s);
+  }
+  .reveal:not(.is-in):is(.reveal--left, .intro > :not(.img-marquee), .media-split > :not(.media-split__img), .room-detail > :not(.room-detail__media), .promise > *) {
+    transform: translateX(calc(var(--rv-x) * -1));
+  }
+  .reveal:not(.is-in):is(.media-split__img, .room-detail__media, .img-marquee, .map-frame) {
+    transform: translateX(var(--rv-x));
+  }
+}
+
+/* ---------- Photo zoom-out on scroll ----------
+   Photos settle from 1.14x to full size as they scroll into view. Uses `scale`, not
+   `transform`, so the hover zooms keep working. Browsers without scroll-driven
+   animations just show the photo at normal size. */
+@keyframes photoSettle {
+  from { scale: 1.14; }
+  to { scale: 1; }
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* overflow: hidden would make each frame its own scroller, and view() would then
+       track the photo inside its frame instead of on the page. clip crops the same. */
+    .media-split__img, .room-detail__tile, .gallery__item, .showcase, .showcase__img { overflow: clip; }
+    :is(.media-split__img, .room-detail__tile, .gallery__item) > img {
+      animation: photoSettle linear both;
+      animation-timeline: view();
+      animation-range: entry cover 45%;
+    }
+    /* Room photo: keeps its existing zoom when switching tabs */
+    .showcase .showcase__img > img {
+      animation: heroZoom 1.2s var(--ease-out), photoSettle linear both;
+      animation-timeline: auto, view();
+      animation-range: normal, entry cover 45%;
+    }
+  }
+}
+
