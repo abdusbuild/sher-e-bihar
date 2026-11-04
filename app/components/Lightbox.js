@@ -37,7 +37,7 @@ export function PhotoGrid({ items, id }) {
       {items.map((p, i) => (
         <a key={i} href={p.src} className="gallery__item reveal" data-cat={p.cat} data-lightbox data-caption={p.alt}>
           <Img src={p.src} alt={p.alt} sizes="(max-width: 600px) 50vw, (max-width: 1100px) 33vw, 400px" />
-          <span>{p.alt}</span>
+          <span aria-hidden="true">{p.alt}</span>
         </a>
       ))}
     </div>

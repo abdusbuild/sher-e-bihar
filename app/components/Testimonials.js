@@ -5,7 +5,7 @@ import Title from "./Title";
 function Stars({ value = 5, small = false }) {
   // Amber overlay clipped to the rating (5 → 100%).
   return (
-    <div className={`stars ${small ? "stars--sm" : ""}`} aria-label={`${value} out of 5 stars`}>
+    <div className={`stars ${small ? "stars--sm" : ""}`} role="img" aria-label={`${value} out of 5 stars`}>
       <div className="stars__row">
         {[0, 1, 2, 3, 4].map((i) => (
           <Icon key={i} name="star" />
@@ -49,7 +49,7 @@ export default function Testimonials() {
                           {r.name.charAt(0)}
                         </span>
                         <span className="testi-card__who">
-                          <h4>{r.name}</h4>
+                          <strong className="testi-card__name">{r.name}</strong>
                           <span className="loc">
                             <Icon name="star" />
                             {r.source}

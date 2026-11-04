@@ -32,7 +32,7 @@ export default function Intro() {
           </Link>
         </div>
         <div className="arch reveal" style={{ "--d": ".15s" }}>
-          <Photo src="/images/exterior-night.jpg" alt="Hotel Sher-e-Bihar lit up at night" sizes="(max-width: 860px) 90vw, 440px" />
+          <Photo src="/images/exterior-night.jpg" alt="Hotel Sher-e-Bihar lit up at night" sizes="(max-width: 860px) min(78vw, 380px), 440px" />
         </div>
       </div>
     </section>

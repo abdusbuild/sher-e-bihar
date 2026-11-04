@@ -3,8 +3,8 @@ import { hotel } from "../data/site";
 
 export default function Logo() {
   return (
-    <Link href="/" className="logo" aria-label={`${hotel.name} home`}>
-      <span className="logo-mark">{hotel.logoMark}</span>
+    <Link href="/" className="logo">
+      <span className="logo-mark" aria-hidden="true">{hotel.logoMark}</span>
       <span className="logo-text">
         <strong>{hotel.logoTitle}</strong>
         <small>{hotel.logoSub}</small>
