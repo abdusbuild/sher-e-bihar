@@ -6,3 +6,6 @@ out
 .next-test
 originals/
 RESEARCH.md
+
+.vercel
+.env*
