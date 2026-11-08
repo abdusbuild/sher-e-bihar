@@ -24,7 +24,7 @@ MARK = "SB"
 OG_CARDS = {
     "home": ("exterior-dusk", 0, 0, 1240, "Hotel, Restaurant & Banquet · Sherghati, Gaya"),
     "rooms": ("room-double-2", 0, 18, 1280, "AC, Standard & Family Rooms"),
-    "banquet": ("banquet-hall-3", 84, 0, 1042, "Wedding & Banquet Hall"),
+    "banquet-v2": ("banquet-hall-3", 151, 0, 908, "Wedding & Banquet Hall"),
     "dining": ("restaurant-hall", 0, 100, 1280, "Restaurant on GT Road"),
     "about": ("exterior-day", 0, 60, 714, "A Family-Run Hotel in Sherghati"),
     "contact": ("exterior-dusk", 640, 470, 960, "Contact & Directions · NH-19, Sherghati"),
