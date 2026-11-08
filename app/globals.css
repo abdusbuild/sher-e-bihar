@@ -29,8 +29,8 @@
   --line: #e7e0d4;
   --shadow: 0 10px 30px -12px rgba(28, 25, 23, .12);
 
-  --f-body: var(--font-noto), "Noto Sans Display", sans-serif;
-  --f-display: var(--font-josefin), "Josefin Sans", sans-serif;
+  --f-body: var(--font-questrial), "Questrial", sans-serif;
+  --f-display: var(--font-aboreto), "Aboreto", serif;
   --f-redhat: var(--f-display);
 
   --ease: cubic-bezier(.4, 0, .2, 1);
@@ -1357,3 +1357,123 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 :is(.media-split__img, .room-detail__tile, .gallery__item) > img { animation: none; transition: none; }
 :is(.media-split__img, .room-detail__tile, .gallery__item):hover img { transform: none; }
 .testi__track { transition: transform 1.2s ease-in-out; }
+
+/* =========================================================
+   Nibras-inspired type & motion
+   Aboreto (wide, all-caps display) for headings, Questrial for body,
+   buttons and nav. Buttons grow 1.05x with an amber gradient on hover,
+   icons nudge sideways, cards lift with a warm glow, photos zoom slowly.
+   ========================================================= */
+:root { --f-ui: var(--f-body); --ease-nb: cubic-bezier(.4, 0, .2, 1); }
+
+/* Aboreto ships one weight; keep headings at 400 so the browser never fakes bold */
+h1, h2, h3, h4,
+.title h2, .sec-head h2, .contact-title h2, .room-detail h2, .rotator-title, .places h2, .getting h2, .modal h2, .not-found h1, .page-hero h1, .hero h1,
+.subhead, .intro h1, .showcase__body h3, .perks h2, .testi-card__name { font-weight: 400; }
+.title h2, .sec-head h2, .contact-title h2, .room-detail h2, .rotator-title, .places h2, .getting h2, .modal h2, .not-found h1, .page-hero h1 { letter-spacing: 3px; }
+.subhead, .intro h1, .showcase__body h3 { letter-spacing: 1px; }
+
+/* UI text in Questrial: buttons, nav, small labels */
+.btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit, .pill, .navbar__book,
+.arrow-link, .nav-pill a, .navbar__place, .navbar__call, .kicker, .showcase__tag, .drawer__head, .drawer__highlights a, .enquire-fab, .peek__nav {
+  font-family: var(--f-ui); font-weight: 400; letter-spacing: .12em;
+}
+
+/* Buttons: 1.05x grow, amber gradient fill, press-down on click */
+.btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit, .navbar__book, .pill {
+  transition: transform .3s var(--ease-nb), background .3s var(--ease-nb), background-position .5s var(--ease-nb), color .3s var(--ease-nb), border-color .3s var(--ease-nb), box-shadow .3s var(--ease-nb);
+}
+.btn-gold, .btn-black, .section .btn-white, .btn-submit {
+  background-image: linear-gradient(to right, var(--navy) 0%, var(--navy) 50%, var(--amber-500) 50%, var(--amber-300) 100%);
+  background-size: 200% 100%; background-position: 0 0;
+}
+.btn-gold:hover, .btn-black:hover, .section .btn-white:hover, .btn-submit:hover {
+  background-position: 100% 0; border-color: var(--amber-400); color: #000;
+  transform: scale(1.05); box-shadow: 0 14px 26px -12px rgba(254, 154, 0, .55);
+}
+.btn-outline:hover, .section .btn-outline:hover, .btn-outline-amber:hover, .btn-gradient:hover {
+  transform: scale(1.05); box-shadow: 0 14px 26px -14px rgba(0, 0, 0, .45);
+}
+.btn-white:active, .btn-outline:active, .btn-black:active, .btn-gold:active, .btn-gradient:active, .btn-outline-amber:active, .btn-submit:active, .navbar__book:active { transform: scale(.98); }
+
+/* Icons inside buttons slide forward */
+.btn-white .ico, .btn-outline .ico, .btn-black .ico, .btn-gold .ico, .btn-outline-amber .ico, .btn-gradient .arrow { transition: transform .3s var(--ease-nb); }
+.btn-white:hover .ico, .btn-outline:hover .ico, .btn-black:hover .ico, .btn-gold:hover .ico, .btn-outline-amber:hover .ico, .btn-gradient:hover .arrow { transform: translateX(4px); }
+
+/* Text links: arrow nudge + amber tint */
+.arrow-link { transition: gap .3s var(--ease-nb), color .3s var(--ease-nb); }
+.arrow-link:hover { color: var(--amber-700); }
+.arrow-link .ico { transition: transform .3s var(--ease-nb); }
+.arrow-link:hover .ico { transform: translateX(4px); }
+
+/* Nav: amber underline grows from the centre */
+.nav-pill a { transition: color .3s var(--ease-nb); }
+.nav-pill a::after { transition: width .3s var(--ease-nb), background .3s; }
+.nav-pill a:hover::after { background: var(--amber-400); }
+
+/* Small round controls pop slightly */
+.peek__btn, .testi__btn, .lightbox__btn, .modal__close { transition: transform .3s var(--ease-nb), background .3s, color .3s; }
+.testi__btn:hover, .lightbox__btn:hover, .modal__close:hover { transform: scale(1.1); }
+
+/* Cards lift with a warm glow; photos zoom slowly */
+.card { transition: transform .3s var(--ease-nb), box-shadow .3s var(--ease-nb), border-color .3s var(--ease-nb); }
+.card:hover { box-shadow: 0 22px 40px -22px rgba(225, 113, 0, .35); }
+.peek__img img, .gallery__item img, .showcase img { transition: transform .7s var(--ease-nb); }
+.peek__slide:hover .peek__img img, .gallery__item:hover img, .showcase:hover img { transform: scale(1.05); }
+
+/* Page-hero title drops in on load */
+@keyframes nbSlideInDown { from { opacity: 0; transform: translate3d(0, -40px, 0); } to { opacity: 1; transform: none; } }
+.page-hero__content { animation: nbSlideInDown 1s var(--ease-nb) both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero__content { animation: none; }
+  .btn-white:hover, .btn-outline:hover, .btn-black:hover, .btn-gold:hover, .btn-gradient:hover, .btn-outline-amber:hover, .btn-submit:hover,
+  .testi__btn:hover, .lightbox__btn:hover, .modal__close:hover,
+  .peek__slide:hover .peek__img img, .gallery__item:hover img, .showcase:hover img { transform: none; }
+}
+
+/* Long text reads better in Questrial than in the wide Aboreto caps */
+.acc__q, .peek figcaption { font-family: var(--f-ui); font-weight: 400; letter-spacing: .02em; }
+
+/* ---------- Phone breathing space ---------- */
+@media (max-width: 600px) {
+  :root { --pad: 22px; }
+  body { line-height: 1.7; }
+  p { margin-bottom: 1.15em; }
+
+  /* Sections and the gaps inside them */
+  .section, .home .section { padding-block: 60px; }
+  .title { margin-bottom: 34px; }
+  .title p { margin-top: 16px; }
+  .sec-head { gap: 16px 20px; margin-bottom: 30px; }
+  .rows { gap: 56px; }
+  .media-split, .intro, .places { gap: 28px; }
+  .subhead { margin-bottom: 14px; }
+  .kicker, .showcase__tag { margin-bottom: 10px; }
+  .btns { gap: 14px; margin-top: 20px; }
+  .arrow-link { margin-top: 6px; }
+
+  /* Headings: Aboreto is very wide, so ease the tracking and give lines room */
+  .sec-head h2, .title h2, .contact-title h2, .room-detail h2, .rotator-title, .places h2, .getting h2, .not-found h1 { font-size: 1.5rem; letter-spacing: 1.5px; line-height: 1.35; }
+  .page-hero h1 { font-size: 1.85rem; letter-spacing: 2px; line-height: 1.3; }
+  .subhead, .intro h1, .showcase__body h3 { font-size: 1.2rem; line-height: 1.4; }
+
+  /* Lists, cards, carousels */
+  .amen { gap: 22px 16px; }
+  .amen__item { gap: 12px; }
+  .acc__q { padding: 22px 0; line-height: 1.45; }
+  .acc__a p { padding-bottom: 8px; }
+  .peek__nav { margin-top: 12px; }
+  .peek figcaption { padding-top: 14px; gap: 10px; }
+  .card { padding: 22px; }
+
+  /* Footer */
+  .footer__top { gap: 32px; }
+  .footer__cols { gap: 30px 20px; }
+  .footer__cols ul { gap: 14px; }
+
+  /* Photo + text rows stack, photo first, so the text gets the full width */
+  .media-split { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .media-split__img, .media-split--rev .media-split__img { order: -1; aspect-ratio: 4/3; }
+  .media-split p { font-size: 1rem; margin-top: 14px; }
+}

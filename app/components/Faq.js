@@ -23,10 +23,7 @@ export default function Faq() {
             <p className="faq-aside__text">Still have a question?</p>
             <div className="btns">
               <a href={`https://wa.me/${hotel.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-gradient">
-                <Icon name="whatsapp" /> Ask On WhatsApp
-                <span className="arrow">
-                  <Icon name="arrow" />
-                </span>
+                <Icon name="whatsapp" /> Ask On WhatsApp
               </a>
             </div>
           </aside>

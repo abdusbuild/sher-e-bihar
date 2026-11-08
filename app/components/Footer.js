@@ -76,7 +76,6 @@ export default function Footer() {
             <p className="footer__addr">{hotel.address}</p>
             <a className="footer__dir" href={hotel.mapLink} target="_blank" rel="noopener noreferrer">
               Get Directions
-              <Icon name="arrow" />
             </a>
           </FooterSection>
         </div>

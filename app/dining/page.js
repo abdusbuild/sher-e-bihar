@@ -60,10 +60,7 @@ export default function Dining() {
           </div>
           <div className="center reveal" style={{ marginTop: 34 }}>
             <a href={`tel:${hotel.phoneTel}`} className="btn-gradient">
-              <Icon name="phone" /> Call To Order Or Book A Table
-              <span className="arrow">
-                <Icon name="arrow" />
-              </span>
+              <Icon name="phone" /> Call To Order Or Book A Table
             </a>
           </div>
         </div>

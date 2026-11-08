@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { hotel, rooms } from "../data/site";
-import Icon from "./Icon";
 import Peek from "./Peek";
 import Photo from "./Photo";
 import { SecHead } from "./Title";
@@ -21,7 +20,7 @@ export default function Rooms() {
           Rooms
         </SecHead>
       </div>
-      <Peek label="Rooms">
+      <Peek label="Rooms" showCount={false}>
         {rooms.map((r) => (
           <figure key={r.id} className="peek__slide">
             <div className="peek__img">
@@ -30,7 +29,7 @@ export default function Rooms() {
             <figcaption>
               <div>
                 <Link href={`/rooms#${r.id}`} className="arrow-link">
-                  {r.name} <Icon name="arrow" />
+                  {r.name}
                 </Link>
                 <small>{r.meta.join(" · ")}</small>
               </div>

@@ -1,4 +1,4 @@
-import { Josefin_Sans, Noto_Sans_Display } from "next/font/google";
+import { Aboreto, Questrial } from "next/font/google";
 import "./globals.css";
 import { hotel } from "./data/site";
 import Navbar from "./components/Navbar";
@@ -9,8 +9,8 @@ import SiteScripts from "./components/SiteScripts";
 import JsonLd from "./components/JsonLd";
 import { ogImage, siteDescription, siteJsonLd, siteUrl } from "./data/seo";
 
-const noto = Noto_Sans_Display({ subsets: ["latin"], variable: "--font-noto" });
-const josefin = Josefin_Sans({ subsets: ["latin"], variable: "--font-josefin" });
+const questrial = Questrial({ subsets: ["latin"], weight: "400", variable: "--font-questrial" });
+const aboreto = Aboreto({ subsets: ["latin"], weight: "400", variable: "--font-aboreto" });
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
@@ -73,7 +73,7 @@ export const viewport = { themeColor: "#211551" };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-IN" className={`${noto.variable} ${josefin.variable}`}>
+    <html lang="en-IN" className={`${questrial.variable} ${aboreto.variable}`}>
       <body>
         <noscript>
           <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>

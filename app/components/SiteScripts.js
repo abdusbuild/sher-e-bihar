@@ -92,7 +92,7 @@ export default function SiteScripts() {
         idx = atEnd
           ? slides.length - 1
           : slides.reduce((best, s, i) => (Math.abs(s.offsetLeft - x) < Math.abs(slides[best].offsetLeft - x) ? i : best), 0);
-        count.textContent = `${idx + 1} / ${slides.length}`;
+        if (count) count.textContent = `${idx + 1} / ${slides.length}`;
       };
       const settle = () => {
         cancelAnimationFrame(raf);
@@ -110,7 +110,7 @@ export default function SiteScripts() {
         settle();
         moving = true;
         track.style.scrollSnapType = "none";
-        count.textContent = `${idx + 1} / ${slides.length}`;
+        if (count) count.textContent = `${idx + 1} / ${slides.length}`;
         const from = track.scrollLeft;
         const start = performance.now();
         const step = (now) => {

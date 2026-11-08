@@ -21,10 +21,7 @@ function Cards({ items }) {
 export function EnquireEvent() {
   return (
     <a href="#" className="btn-gradient" data-open-modal data-room="Banquet / Event">
-      Enquire For Your Event
-      <span className="arrow">
-        <Icon name="arrow" />
-      </span>
+      Enquire For Your Event
     </a>
   );
 }

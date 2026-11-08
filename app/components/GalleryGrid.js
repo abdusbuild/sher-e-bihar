@@ -26,9 +26,6 @@ export default function GalleryGrid() {
           <p>Follow {hotel.name} on Instagram for the latest photos.</p>
           <a href={hotel.instagram} target="_blank" rel="noopener noreferrer" className="btn-gradient">
             <Icon name="instagram" /> Follow On Instagram
-            <span className="arrow">
-              <Icon name="arrow" />
-            </span>
           </a>
         </div>
       </section>
