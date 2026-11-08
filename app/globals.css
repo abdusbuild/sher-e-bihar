@@ -1477,3 +1477,15 @@ h1, h2, h3, h4,
   .media-split__img, .media-split--rev .media-split__img { order: -1; aspect-ratio: 4/3; }
   .media-split p { font-size: 1rem; margin-top: 14px; }
 }
+
+/* Aboreto has no bold: stop the browser faking it */
+.faq-aside__text, .places__list b, .stat-big b { font-weight: 400; }
+
+@media (max-width: 600px) {
+  /* Page-hero stats sit in one even row instead of wrapping */
+  .hero__stats--inline { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 12px; width: 100%; max-width: 340px; margin: 22px auto 0; }
+  .hero__stats--inline .stat-big b { font-size: 1.5rem; }
+  .hero__stats--inline .stat-big span { font-size: 10px; letter-spacing: .08em; line-height: 1.4; }
+  .places__list b { font-size: 1.05rem; letter-spacing: .04em; }
+  .faq-aside__text { font-size: 1.25rem; }
+}
