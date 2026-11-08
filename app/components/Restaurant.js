@@ -5,23 +5,26 @@ import { SecHead } from "./Title";
 
 // Restaurant band: text on the left, large photo on the right. On the home page it links to /dining.
 export default function Restaurant({ teaser = false }) {
+  // The /dining page already says "Dining" in its hero, so only the home teaser gets the section heading.
+  // Without it, the subhead becomes the page's h2 so the heading order stays h1 → h2.
+  const Subhead = teaser ? "h3" : "h2";
   return (
     <section className="section band--sand">
       <div className="wrap">
-        <SecHead
-          action={
-            teaser && (
+        {teaser && (
+          <SecHead
+            action={
               <Link href="/dining" className="btn-outline">
                 Explore Dining
               </Link>
-            )
-          }
-        >
-          Dining
-        </SecHead>
+            }
+          >
+            Dining
+          </SecHead>
+        )}
         <div className="dine">
           <div className="reveal">
-            <h3 className="subhead">Fresh, Home-Style Food All Day</h3>
+            <Subhead className="subhead">Fresh, Home-Style Food All Day</Subhead>
             <span className="kicker">In-house Restaurant</span>
             <p>{restaurant.text}</p>
             <ul className="showcase__meta">
