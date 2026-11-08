@@ -15,7 +15,7 @@ export default function HomeFaq() {
             <p className="faq-aside__text">Have more questions?</p>
             <div className="btns">
               <Link href="/faq" className="btn-gradient">
-                View All FAQs
+                View All FAQs
               </Link>
               <a href={`https://wa.me/${hotel.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-outline-amber">
                 <Icon name="whatsapp" /> Ask On WhatsApp
