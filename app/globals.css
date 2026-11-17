@@ -1,7 +1,7 @@
 /* =========================================================
    Hotel Sher-e-Bihar — styles
    Design & motion follow the Vaishnavi Heights reference:
-   Questrial body, Aboreto display, Red Hat Display logo; amber accents;
+   Jost body (was Questrial), Aboreto display, Red Hat Display logo; amber accents;
    black hero / nav / footer with warm off-white content sections.
    ========================================================= */
 
@@ -29,7 +29,7 @@
   --line: #e7e0d4;
   --shadow: 0 10px 30px -12px rgba(28, 25, 23, .12);
 
-  --f-body: var(--font-questrial), "Questrial", sans-serif;
+  --f-body: var(--font-jost), "Jost", sans-serif;
   --f-display: var(--font-aboreto), "Aboreto", serif;
   --f-redhat: var(--f-display);
 
@@ -1019,7 +1019,7 @@ body:has(.not-found) .navbar { background: rgba(0, 0, 0, .82); backdrop-filter: 
    Josefin Sans headings and Noto Sans Display text. Full-width photos, a solid maroon header with a centred logo, light
    wide-tracked uppercase headings, square buttons, arrow links, peek
    carousels, calm tinted bands and an Indian arch as the shape motif.
-   Colours match the reference page. Older colour names are kept: --gold is now the pale lavender used on dark backgrounds.
+   Colours match the reference page. Older colour names are kept: --gold is the logo's crown gold, used on dark backgrounds; --gold-ink is its dark version for text on white.
    ========================================================= */
 :root {
   --radius: 8px; /* cards, photos, panels */
@@ -1027,11 +1027,12 @@ body:has(.not-found) .navbar { background: rgba(0, 0, 0, .82); backdrop-filter: 
   --navy: #211551;
   --navy-900: #150d38;
   --navy-700: #3b2f73;
-  --gold: #d3d0dc;
-  --gold-hover: #d3d0dc;
-  --amber-300: #d3d0dc;
-  --amber-400: #d3d0dc;
-  --amber-500: #b98a3a;
+  --gold: #c9a54c; /* crown gold from the logo, for dark (navy) backgrounds: 6.9:1 on --navy */
+  --gold-hover: #ddbf73;
+  --gold-ink: #8a6a1f; /* same gold, dark enough for text on white: 5:1 */
+  --amber-300: #ddbf73;
+  --amber-400: #c9a54c;
+  --amber-500: #b8963e;
   --amber-600: #211551;
   --amber-700: #211551;
   --cream: #fff;
@@ -1420,7 +1421,7 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 
 /* =========================================================
    Nibras-inspired type & motion
-   Aboreto (wide, all-caps display) for headings, Questrial for body,
+   Aboreto (wide, all-caps display) for headings, Jost for body,
    buttons and nav. Buttons grow 1.05x with an amber gradient on hover,
    icons nudge sideways, cards lift with a warm glow, photos zoom slowly.
    ========================================================= */
@@ -1433,7 +1434,7 @@ h1, h2, h3, h4,
 .title h2, .sec-head h2, .contact-title h2, .room-detail h2, .rotator-title, .places h2, .getting h2, .modal h2, .not-found h1, .page-hero h1 { letter-spacing: 3px; }
 .subhead, .intro h1, .showcase__body h3 { letter-spacing: 1px; }
 
-/* UI text in Questrial: buttons, nav, small labels */
+/* UI text in the body font (Jost): buttons, nav, small labels */
 .btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit, .pill, .navbar__book,
 .arrow-link, .nav-pill a, .navbar__place, .navbar__call, .kicker, .showcase__tag, .drawer__head, .drawer__highlights a, .enquire-fab {
   font-family: var(--f-ui); font-weight: 400; letter-spacing: .12em;
@@ -1495,7 +1496,7 @@ h1, h2, h3, h4,
   .peek__slide:hover .peek__img img, .gallery__item:hover img, .showcase:hover img { transform: none; }
 }
 
-/* Long text reads better in Questrial than in the wide Aboreto caps */
+/* Long text reads better in Jost than in the wide Aboreto caps */
 .acc__q, .peek figcaption { font-family: var(--f-ui); font-weight: 400; letter-spacing: .02em; }
 
 /* ---------- Phone breathing space ---------- */
@@ -1557,12 +1558,12 @@ h1, h2, h3, h4,
 h1, h2, h3, h4, .subhead, .rotator-title { -webkit-text-stroke: .035em currentColor; }
 .legal-toc h2 { -webkit-text-stroke: 0; }
 
-/* Nav links a touch heavier (Questrial also ships one weight) */
-.nav-pill a { -webkit-text-stroke: .025em currentColor; }
+/* Nav links a touch heavier: Jost has a real 500 weight, so no stroke trick needed */
+.nav-pill a { font-weight: 500; }
 
-/* CTA labels get the same slight weight as the nav */
+/* CTA labels get the same slight weight as the nav (real Jost 500) */
 .btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit,
-.navbar__book, .arrow-link, .peek__book { -webkit-text-stroke: .025em currentColor; }
+.navbar__book, .arrow-link, .peek__book { font-weight: 500; }
 
 /* CTA hover: the hover colour fills the button from the bottom up instead of switching at once.
    :is() takes the specificity of its strongest selector, so these beat every older hover `background`. */
@@ -1625,3 +1626,43 @@ h1, h2, h3, h4, .subhead, .rotator-title { -webkit-text-stroke: .035em currentCo
 /* About hero: 3-photo collage, wide version on landscape screens, stacked version on phones */
 .page-hero--collage .page-hero__bg picture img { object-fit: cover; object-position: center 20%; }
 @media (max-aspect-ratio: 1/1) { .page-hero--collage .page-hero__bg picture img { object-position: center top; } }
+
+/* Brand crest (from the hotel's logo) in place of the old "SB" box */
+.logo-mark.logo-mark--crest { width: auto; height: 66px; aspect-ratio: 632 / 560; background: none; border-radius: 0; padding: 0; }
+.logo-mark--crest img { display: block; width: 100%; height: 100%; object-fit: contain; }
+@media (max-width: 860px) { .logo-mark.logo-mark--crest { height: 56px; } }
+@media (max-width: 600px) { .logo-mark.logo-mark--crest { height: 48px; } }
+/* Gold labels over hero photos: a soft shadow keeps them readable over busy backgrounds */
+.page-hero .stat-big span, .page-hero__sub { text-shadow: 0 1px 3px rgba(0, 0, 0, .75); }
+
+/* =========================================================
+   Typography clean-up (Jost body)
+   Scale: labels 12-13px (uppercase, tracked) · small/meta 15px · body 17px · lead 18px+.
+   Jost's x-height is ~8% smaller than Questrial's, so 17px Jost reads like the old 16px, only crisper.
+   ========================================================= */
+/* Never let the browser fake a bold: Aboreto ships one weight (Jost has real ones) */
+html { font-synthesis-weight: none; }
+.footer__dir, .footer__acc-btn, .contact-box__info .lbl, p.lbl { font-weight: 400; }
+
+/* Body copy: one size everywhere */
+main p:not(.note):not(.lbl):not(.photo-credits):not(.faq-aside__text):not(.lead):not(.is-short):not(.page-hero__sub),
+main .check-list li { font-size: 1.0625rem; line-height: 1.65; }
+/* Jost 300 is too thin for reading text */
+p.sub, p.val, a.val.dir { font-weight: 400; }
+
+/* Small / meta text */
+.footer__brand p, .footer__addr, .footer__cols li, .footer__cols a, .peek__slide figcaption, .videos__item figcaption { font-size: .9375rem; }
+
+/* Labels and captions: never below 12px on phones */
+.stat-big span { font-size: .75rem; }
+.logo-text small { font-size: .75rem; }
+.showcase__meta li, .footer__bottom, .footer__bottom a, .gallery__item span:not(.ph span) { font-size: .8125rem; }
+@media (max-width: 600px) {
+  .logo-text small { font-size: .75rem; letter-spacing: .1em; }
+  .page-hero .stat-big span, .hero__stats .stat-big span { font-size: .75rem; }
+}
+
+/* Places Near Us: bold list. Aboreto has no bold weight, so names get the same hairline stroke as the
+   headings (no faux bold); distances use Jost's real 600 weight */
+.places__list b { -webkit-text-stroke: .04em currentColor; }
+.places__list span { font-weight: 600; color: var(--ink); }

@@ -1,4 +1,4 @@
-import { Aboreto, Questrial } from "next/font/google";
+import { Aboreto, Jost } from "next/font/google";
 import "./globals.css";
 import { hotel } from "./data/site";
 import Navbar from "./components/Navbar";
@@ -9,7 +9,8 @@ import SiteScripts from "./components/SiteScripts";
 import JsonLd from "./components/JsonLd";
 import { ogImage, siteDescription, siteJsonLd, siteUrl } from "./data/seo";
 
-const questrial = Questrial({ subsets: ["latin"], weight: "400", variable: "--font-questrial" });
+// Jost: geometric body font with real weights 100-900 + italics (Questrial had only one weight, so bold was faked)
+const jost = Jost({ subsets: ["latin"], variable: "--font-jost", display: "swap" });
 const aboreto = Aboreto({ subsets: ["latin"], weight: "400", variable: "--font-aboreto" });
 
 export const metadata = {
@@ -22,7 +23,10 @@ export const metadata = {
   applicationName: hotel.name,
   appleWebApp: { title: "Sher-e-Bihar" },
   icons: {
-    icon: [{ url: "/icon.svg", type: "image/svg+xml", sizes: "any" }],
+    icon: [
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
   keywords: [
@@ -73,7 +77,7 @@ export const viewport = { themeColor: "#211551" };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en-IN" className={`${questrial.variable} ${aboreto.variable}`}>
+    <html lang="en-IN" className={`${jost.variable} ${aboreto.variable}`}>
       <body>
         <noscript>
           <style>{`.reveal{opacity:1!important;transform:none!important}`}</style>
