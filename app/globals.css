@@ -1127,7 +1127,8 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .drawer__book.btn-gold:hover { background: var(--gold-hover); border-color: var(--gold-hover); }
 
 /* Home hero: just the photos */
-.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.hero__video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; background: #000 url("/videos/hero-desktop-poster.jpg") center / cover no-repeat; }
+@media (max-aspect-ratio: 1/1) { .hero__video { background-image: url("/videos/hero-mobile-poster.jpg"); } }
 @media (prefers-reduced-motion: reduce) { .hero__video { display: none; } }
 .hero { min-height: 0; height: clamp(360px, calc(100svh - 190px), 820px); }
 .hero::after { background: linear-gradient(to top, rgba(0, 0, 0, .3), transparent 40%); }
