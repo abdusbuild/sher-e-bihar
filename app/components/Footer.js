@@ -12,14 +12,15 @@ export default function Footer() {
           <div className="footer__brand">
             <Logo />
             <p>{hotel.tagline} — on the GT Road at Akauna, Sherghati.</p>
-            <div className="socials-round">
-              <a href={`https://wa.me/${hotel.whatsapp}`} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+            <p className="footer__connect">Connect with us</p>
+            <div className="socials-round socials-brand">
+              <a href={`https://wa.me/${hotel.whatsapp}`} className="s-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                 <Icon name="whatsapp" />
               </a>
-              <a href={hotel.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href={hotel.instagram} className="s-instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <Icon name="instagram" />
               </a>
-              <a href={hotel.mapLink} target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
+              <a href={hotel.mapLink} className="s-maps" target="_blank" rel="noopener noreferrer" aria-label="Google Maps">
                 <Icon name="pin" />
               </a>
             </div>

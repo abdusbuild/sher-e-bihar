@@ -1728,3 +1728,15 @@ p.sub, p.val, a.val.dir { font-weight: 400; }
 :is(.leaf, .media-split__img).slider .slider__view { aspect-ratio: auto; height: 100%; border-radius: 4px; }
 /* Home intro slider has no position bars, so it doesn't need the dark fade they sat on */
 .leaf.slider .slider__view::after { content: none; }
+
+/* Footer socials, Hyatt-style: solid brand-colour circles with white glyphs under a "Connect with us" label.
+   Colours are the brands' own, darkened just enough that the white glyph keeps 3:1 contrast. */
+.footer__brand .footer__connect { margin: 22px 0 12px; font-family: var(--f-display); font-size: .85rem; letter-spacing: .16em; text-transform: uppercase; color: #fff; }
+.footer .socials-brand { gap: 14px; }
+.footer .socials-brand a { width: 42px; height: 42px; border: 0; color: #fff; box-shadow: none; transition: transform .25s, box-shadow .25s, filter .25s; }
+.footer .socials-brand a.s-whatsapp, .footer .socials-brand a.s-whatsapp:hover { background: #1da851; }
+.footer .socials-brand a.s-instagram, .footer .socials-brand a.s-instagram:hover { background: #e4405f; }
+.footer .socials-brand a.s-maps, .footer .socials-brand a.s-maps:hover { background: #1a73e8; }
+.footer .socials-brand a:hover { color: #fff; transform: translateY(-3px); filter: brightness(1.08); box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .7); }
+.footer .socials-brand a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.footer .socials-brand .ico { width: 20px; height: 20px; }
