@@ -1,9 +1,11 @@
+import Link from "next/link";
 import PageHero from "../components/PageHero";
 import JsonLd from "../components/JsonLd";
 import { breadcrumbLd, pageMeta } from "../data/seo";
 import Restaurant from "../components/Restaurant";
 import Title from "../components/Title";
 import Icon from "../components/Icon";
+import Photo from "../components/Photo";
 import { hotel, restaurant } from "../data/site";
 
 export const metadata = pageMeta({
@@ -11,27 +13,32 @@ export const metadata = pageMeta({
   description:
     "Home-style Indian restaurant on NH-19 at Sherghati: kadhai chicken, dal tadka, paneer, tandoori roti, pakodas and chai. Open to guests, walk-ins and bus groups.",
   path: "/dining",
-  image: "/og/dining.jpg",
+  image: "/og/dining-v3.jpg",
 });
 
 export default function Dining() {
   return (
     <>
       <JsonLd data={breadcrumbLd("Dining", "/dining")} />
-      <PageHero title="Dining" sub="Fresh, home-style food all day" image="/images/restaurant-hall.jpg" />
+      <PageHero title="Dining" sub="Fresh, home-style food all day" image="/images/restaurant-hall-3.jpg" />
       <Restaurant />
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <Title sub="A taste of what's cooking in our kitchen.">Menu Highlights</Title>
-          <div className="cards cards--3" data-stagger=".08">
+          <div className="cards cards--3 dishes" data-stagger=".08">
             {restaurant.dishes.map((d) => (
-              <div key={d.title} className="card reveal">
-                <Icon name="food" />
+              <div key={d.title} className="card dish reveal">
+                <div className="dish__img">
+                  <Photo src={d.image} alt={d.title} sizes="(max-width: 600px) 100vw, (max-width: 860px) 50vw, 400px" />
+                </div>
                 <h3>{d.title}</h3>
                 <p>{d.text}</p>
               </div>
             ))}
           </div>
+          <p className="photo-credits reveal">
+            Dish photos are for illustration. <Link href="/credits">Photo credits</Link>
+          </p>
           <div className="dining-info reveal">
             <div className="dining-info__box">
               <h3>

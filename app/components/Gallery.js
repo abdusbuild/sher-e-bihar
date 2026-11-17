@@ -5,7 +5,7 @@ import Photo from "./Photo";
 import { SecHead } from "./Title";
 
 // A short selection for the home page. The full set is on /gallery.
-const picks = ["/images/room-family.jpg", "/images/banquet-stage-heart.jpg", "/images/restaurant-hall.jpg", "/images/banquet-hall-1.jpg", "/images/room-double-2.jpg"];
+const picks = ["/images/room-family-1.jpg", "/images/banquet-stage-2.jpg", "/images/restaurant-hall-3.jpg", "/images/banquet-hall-3.jpg", "/images/room-suite-1.jpg"];
 const slides = picks.map((src) => photos.find((p) => p.src === src));
 
 // Home page "Look Around" carousel.
@@ -27,7 +27,7 @@ export default function Gallery() {
         {slides.map((p) => (
           <figure key={p.src} className="peek__slide">
             <div className="peek__img">
-              <Photo src={p.src} alt={p.alt} sizes="(max-width: 600px) 86vw, 1040px" />
+              <Photo src={p.src} alt={p.alt} sizes="(max-width: 600px) 86vw, 760px" />
             </div>
             <figcaption>{p.alt}</figcaption>
           </figure>

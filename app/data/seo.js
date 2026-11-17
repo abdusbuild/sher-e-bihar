@@ -12,7 +12,7 @@ export const abs = (path) => (path.startsWith("http") ? path : `${siteUrl}${path
 
 // Link-preview cards live in public/og (all 1200x630, under 300 KB so WhatsApp shows them). Rebuild with scripts/share-assets.py.
 const shareCard = (url, alt) => ({ url, width: 1200, height: 630, type: "image/jpeg", alt });
-export const ogImage = shareCard("/og/home.jpg", `${hotel.name} on GT Road, Sherghati`);
+export const ogImage = shareCard("/og/home-v3.jpg", `${hotel.name} on GT Road, Sherghati`);
 
 export const siteDescription =
   "Family-run hotel on NH-19 (GT Road), Sherghati, Gaya: clean AC rooms, 24-hour front desk, restaurant and banquet hall. Book direct by phone or WhatsApp.";
@@ -85,7 +85,7 @@ export const siteJsonLd = {
       telephone: hotel.phoneTel,
       ...(hotel.email && { email: hotel.email }),
       logo: abs("/icons/icon-512.png"),
-      image: ["/images/exterior-dusk.jpg", "/images/exterior-day.jpg", "/images/room-double-1.jpg", "/images/banquet-hall-2.jpg", "/images/restaurant-hall.jpg"].map(abs),
+      image: ["/images/exterior-front.jpg", "/images/exterior-forecourt.jpg", "/images/room-deluxe-1.jpg", "/images/banquet-stage-2.jpg", "/images/restaurant-hall-3.jpg"].map(abs),
       address,
       geo,
       hasMap: hotel.mapLink,

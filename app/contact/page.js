@@ -9,14 +9,14 @@ export const metadata = pageMeta({
   description:
     "Call or WhatsApp +91 62905 00076. Find Hotel Sher-e-Bihar on NH-19 (GT Road) at Akauna, Sherghati, Gaya, Bihar 824211, about 35 km from Bodh Gaya.",
   path: "/contact",
-  image: "/og/contact.jpg",
+  image: "/og/contact-v3.jpg",
 });
 
 export default function ContactPage() {
   return (
     <>
       <JsonLd data={breadcrumbLd("Contact Us", "/contact")} />
-      <PageHero title="Contact Us" sub="We're here for you 24 hours a day" image="/images/exterior-day.jpg" />
+      <PageHero title="Contact Us" sub="We're here for you 24 hours a day" image="/images/exterior-front.jpg" />
       <Contact map />
       <Reach />
       <Nearby />

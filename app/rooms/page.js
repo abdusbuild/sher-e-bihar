@@ -4,14 +4,15 @@ import { breadcrumbLd, roomsJsonLd, pageMeta } from "../data/seo";
 import RoomDetails from "../components/RoomDetails";
 import Title from "../components/Title";
 import Icon from "../components/Icon";
-import { hotel, inEveryRoom, rooms } from "../data/site";
+import VideoGrid from "../components/VideoGrid";
+import { hotel, inEveryRoom, rooms, videos } from "../data/site";
 
 export const metadata = pageMeta({
   title: "AC, Standard & Family Rooms",
   description:
     "Standard, Deluxe AC and Family rooms at Hotel Sher-e-Bihar, Sherghati: attached bathrooms, hot water, room service, free parking and 24-hour front desk.",
   path: "/rooms",
-  image: "/og/rooms.jpg",
+  image: "/og/rooms-v3.jpg",
 });
 
 export default function RoomsPage() {
@@ -22,7 +23,7 @@ export default function RoomsPage() {
       <PageHero
         title="Our Rooms"
         sub="Clean, comfortable rooms for every kind of trip"
-        image="/images/room-family.jpg"
+        image="/images/room-family-1.jpg"
         stats={[
           { value: String(rooms.length), label: "Room types" },
           { value: hotel.checkIn.replace(":00", ""), label: "Check-in" },
@@ -30,6 +31,12 @@ export default function RoomsPage() {
         ]}
       />
       <RoomDetails />
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <Title sub="Short walkthroughs of our rooms. Tap a clip to play.">Room Videos</Title>
+          <VideoGrid items={videos.filter((v) => v.room)} />
+        </div>
+      </section>
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <Title sub="Little comforts that come with every stay.">In Every Room</Title>

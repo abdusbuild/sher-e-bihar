@@ -1,8 +1,32 @@
 import Link from "next/link";
-import { hotel, rooms } from "../data/site";
+import { hotel, photos, rooms } from "../data/site";
 import Peek from "./Peek";
 import Photo from "./Photo";
 import { SecHead } from "./Title";
+
+const altOf = (src) => photos.find((p) => p.src === src)?.alt;
+
+// Every room photo: each room type's shots (captioned with the room name),
+// then the room photos that belong to no single type (suite, bathroom, corridor).
+const typed = [
+  ...rooms.map((r) => ({ src: r.images[0], alt: r.name, room: r })),
+  ...rooms.flatMap((r) => r.images.slice(1).map((src) => ({ src, alt: altOf(src) || r.name, room: r }))),
+];
+const all = [...typed, ...photos.filter((p) => p.cat === "rooms" && !typed.some((s) => s.src === p.src))];
+// Slide order chosen by hand; any room photo not listed here follows in the order above.
+const order = [
+  "/images/room-suite-2.jpg",
+  "/images/room-family-1.jpg",
+  "/images/room-family-2.jpg",
+  "/images/room-standard-1.jpg",
+  "/images/room-family-3.jpg",
+  "/images/room-deluxe-1.jpg",
+  "/images/room-standard-2.jpg",
+];
+const slides = [
+  ...order.map((src) => all.find((s) => s.src === src)).filter(Boolean),
+  ...all.filter((s) => !order.includes(s.src)),
+];
 
 // Home page room carousel.
 export default function Rooms() {
@@ -20,21 +44,21 @@ export default function Rooms() {
           Rooms
         </SecHead>
       </div>
-      <Peek label="Rooms" showCount={false}>
-        {rooms.map((r) => (
-          <figure key={r.id} className="peek__slide">
+      <Peek label="Rooms" showCount={false} className="peek--sm">
+        {slides.map(({ src, alt, room: r }) => (
+          <figure key={src} className="peek__slide">
             <div className="peek__img">
-              <Photo src={r.images[0]} alt={r.name} sizes="(max-width: 600px) 86vw, 1040px" />
+              <Photo src={src} alt={alt} sizes="(max-width: 600px) 86vw, 760px" />
             </div>
             <figcaption>
               <div>
-                <Link href={`/rooms#${r.id}`} className="arrow-link">
-                  {r.name}
+                <Link href={r ? `/rooms#${r.id}` : "/rooms"} className="arrow-link">
+                  {r ? r.name : alt}
                 </Link>
-                <small>{r.meta.join(" · ")}</small>
+                {r && <small>{r.meta.join(" · ")}</small>}
               </div>
-              <a href="#" className="peek__book" data-open-modal data-room={r.name}>
-                Book this room
+              <a href="#" className="peek__book" data-open-modal data-room={r?.name}>
+                {r ? "Book this room" : "Book a room"}
               </a>
             </figcaption>
           </figure>

@@ -46,9 +46,9 @@ export const menuGroups = [
     title: "Stay",
     href: "/rooms",
     links: [
-      { href: "/rooms#standard", label: "Standard Room" },
-      { href: "/rooms#deluxe", label: "Deluxe AC Room" },
       { href: "/rooms#family", label: "Family Room" },
+      { href: "/rooms#deluxe", label: "Deluxe AC Room" },
+      { href: "/rooms#standard", label: "Standard Room" },
       { href: "#", label: "Booking Enquiry", action: "modal" },
     ],
   },
@@ -92,7 +92,7 @@ export const menuHighlights = [
 ];
 
 // Hero background slideshow (crossfades every 6s)
-export const heroImages = ["/images/exterior-dusk.jpg", "/images/room-double-1.jpg", "/images/banquet-hall-2.jpg", "/images/restaurant-hall.jpg"];
+export const heroImages = ["/images/exterior-front.jpg", "/images/room-deluxe-1.jpg", "/images/banquet-stage-2.jpg", "/images/restaurant-hall-3.jpg"];
 
 export const heroStats = [
   { text: "437", label: "Google reviews" },
@@ -110,22 +110,48 @@ export const galleryCats = [
   { id: "banquet", label: "Banquet" },
 ];
 
-// Photos uploaded by the hotel to its Google Maps listing ("By owner").
+// Photos of the hotel taken on site in November 2026.
 export const photos = [
-  { src: "/images/exterior-dusk.jpg", alt: "Hotel Sher-E-Bihar at dusk", cat: "exterior" },
-  { src: "/images/room-double-1.jpg", alt: "Double room", cat: "rooms" },
-  { src: "/images/banquet-hall-2.jpg", alt: "Banquet hall decorated for a function", cat: "banquet" },
-  { src: "/images/restaurant-hall.jpg", alt: "Restaurant dining hall", cat: "dining" },
-  { src: "/images/room-family.jpg", alt: "Family room", cat: "rooms" },
-  { src: "/images/banquet-stage-heart.jpg", alt: "Floral stage decoration", cat: "banquet" },
-  { src: "/images/exterior-day.jpg", alt: "Hotel building on GT Road", cat: "exterior" },
-  { src: "/images/room-double-2.jpg", alt: "Double room with sofa", cat: "rooms" },
-  { src: "/images/banquet-hall-1.jpg", alt: "Banquet hall seating", cat: "banquet" },
-  { src: "/images/exterior-night.jpg", alt: "Hotel lit up at night", cat: "exterior" },
-  { src: "/images/room-double-3.jpg", alt: "Double room", cat: "rooms" },
-  { src: "/images/banquet-stage-1.jpg", alt: "Decorated stage", cat: "banquet" },
-  { src: "/images/banquet-hall-3.jpg", alt: "Banquet hall with stage", cat: "banquet" },
-  { src: "/images/banquet-stage-2.jpg", alt: "Stage with balloon decoration", cat: "banquet" },
+  { src: "/images/room-suite-2.jpg", alt: "Large room with sofa and AC", cat: "rooms" },
+  { src: "/images/exterior-front.jpg", alt: "Hotel Sher-e-Bihar from the GT Road", cat: "exterior" },
+  { src: "/images/room-deluxe-1.jpg", alt: "Double room with AC", cat: "rooms" },
+  { src: "/images/restaurant-hall-1.jpg", alt: "Restaurant dining hall", cat: "dining" },
+  { src: "/images/room-family-1.jpg", alt: "Family room with two double beds", cat: "rooms" },
+  { src: "/images/exterior-entrance.jpg", alt: "Hotel entrance and forecourt", cat: "exterior" },
+  { src: "/images/room-suite-1.jpg", alt: "Large room with sofa", cat: "rooms" },
+  { src: "/images/room-standard-1.jpg", alt: "Double room", cat: "rooms" },
+  { src: "/images/exterior-garden.jpg", alt: "Hotel building from the garden side", cat: "exterior" },
+  { src: "/images/room-twin.jpg", alt: "Twin room", cat: "rooms" },
+  { src: "/images/banquet-stage-2.jpg", alt: "Stage drapes and chandeliers", cat: "banquet" },
+  { src: "/images/room-family-2.jpg", alt: "Family room", cat: "rooms" },
+  { src: "/images/restaurant-hall-3.jpg", alt: "Restaurant with lounge seating", cat: "dining" },
+  { src: "/images/garden-walkway.jpg", alt: "Garden walkway beside the hotel", cat: "exterior" },
+  { src: "/images/room-deluxe-2.jpg", alt: "Double room with wardrobe", cat: "rooms" },
+  { src: "/images/banquet-hall-3.jpg", alt: "Banquet hall floor and stage", cat: "banquet" },
+  { src: "/images/exterior-forecourt.jpg", alt: "Hotel building on GT Road", cat: "exterior" },
+  { src: "/images/room-family-3.jpg", alt: "Family room with sofa", cat: "rooms" },
+  { src: "/images/banquet-lounge.jpg", alt: "Lounge seating beside the hall", cat: "banquet" },
+  { src: "/images/room-deluxe-tv.jpg", alt: "LED TV and AC in a double room", cat: "rooms" },
+  { src: "/images/room-standard-2.jpg", alt: "Double room with a window view", cat: "rooms" },
+  { src: "/images/room-family-6.jpg", alt: "Family room with two beds and AC", cat: "rooms" },
+  { src: "/images/room-double-window.jpg", alt: "Double bed by the window", cat: "rooms" },
+  { src: "/images/room-family-7.jpg", alt: "Family room with ceiling lights", cat: "rooms" },
+  { src: "/images/room-bathroom.jpg", alt: "Attached bathroom", cat: "rooms" },
+  { src: "/images/room-corridor.jpg", alt: "Room corridor", cat: "rooms" },
+];
+
+// Short walkthrough clips in public/videos (upright H.264 MP4, no sound) with a poster frame of the same name.
+// Camera originals are kept in originals/videos (not published). `room: true` clips also show on the Rooms page.
+export const videos = [
+  { src: "/videos/exterior.mp4", poster: "/videos/exterior.jpg", title: "The hotel from GT Road" },
+  { src: "/videos/family-room.mp4", poster: "/videos/family-room.jpg", title: "Family room", room: true },
+  { src: "/videos/double-room.mp4", poster: "/videos/double-room.jpg", title: "Double room and bathroom", room: true },
+  { src: "/videos/room-with-sofa.mp4", poster: "/videos/room-with-sofa.jpg", title: "Double room with sofa", room: true },
+  { src: "/videos/suite-room.mp4", poster: "/videos/suite-room.jpg", title: "Large room with sofa", room: true },
+  { src: "/videos/corridor.mp4", poster: "/videos/corridor.jpg", title: "Room corridor and stairs" },
+  { src: "/videos/banquet-hall.mp4", poster: "/videos/banquet-hall.jpg", title: "Banquet hall" },
+  { src: "/videos/restaurant.mp4", poster: "/videos/restaurant.jpg", title: "Restaurant" },
+  { src: "/videos/hotel-view.mp4", poster: "/videos/hotel-view.jpg", title: "View from the hotel" },
 ];
 
 export const perfectFor = ["Family Stays", "Weddings & Events", "Pilgrim Journeys", "Highway Breaks", "Business Trips"];
@@ -135,32 +161,32 @@ export const highlights = ["Clean, comfortable rooms", "In-house restaurant", "B
 // TODO: confirm room types, beds, occupancy and descriptions with the owner.
 export const rooms = [
   {
-    id: "standard",
-    name: "Standard Room",
-    tag: "Best value",
-    // TODO: confirm with the owner which photos show which room type
-    images: ["/images/room-double-3.jpg", "/images/room-double-1.jpg", "/images/room-double-2.jpg"],
-    meta: ["1 Double bed", "Up to 2 adults", "Attached bathroom"],
-    text: "A clean, comfortable room for solo travellers and couples on the move — fresh linen, an attached bathroom with hot water and room service from our kitchen.",
-    features: ["Double bed with fresh linen", "Attached bathroom", "Hot & cold water", "Room service", "Daily housekeeping", "Free parking"],
+    id: "family",
+    name: "Family Room",
+    tag: "Most spacious",
+    images: ["/images/room-family-1.jpg", "/images/room-family-2.jpg", "/images/room-family-3.jpg"],
+    meta: ["Double + single bed", "Up to 4 guests", "Extra bed on request"],
+    text: "Room for the whole family or a small group of pilgrims — extra beds, plenty of space and the restaurant just downstairs.",
+    features: ["Double + single bed", "Extra bed on request", "Air conditioning", "LED TV", "Attached bathroom", "Room service"],
   },
   {
     id: "deluxe",
     name: "Deluxe AC Room",
     tag: "Most booked",
-    images: ["/images/room-double-1.jpg", "/images/room-double-2.jpg", "/images/room-double-3.jpg"],
+    images: ["/images/room-deluxe-1.jpg", "/images/room-deluxe-2.jpg", "/images/room-deluxe-tv.jpg"],
     meta: ["1 Double bed", "2 adults + 1 child", "Air conditioned"],
     text: "Our most popular room — air-conditioned, with a comfortable double bed, LED TV and attached bathroom. Ideal for a restful night's break on the GT Road.",
     features: ["Air conditioning", "LED TV", "Attached bathroom", "Hot & cold water", "Room service", "Daily housekeeping"],
   },
   {
-    id: "family",
-    name: "Family Room",
-    tag: "Most spacious",
-    images: ["/images/room-family.jpg", "/images/room-double-2.jpg", "/images/room-double-1.jpg"],
-    meta: ["Double + single bed", "Up to 4 guests", "Extra bed on request"],
-    text: "Room for the whole family or a small group of pilgrims — extra beds, plenty of space and the restaurant just downstairs.",
-    features: ["Double + single bed", "Extra bed on request", "Air conditioning", "LED TV", "Attached bathroom", "Room service"],
+    id: "standard",
+    name: "Standard Room",
+    tag: "Best value",
+    // TODO: confirm with the owner which photos show which room type
+    images: ["/images/room-standard-1.jpg", "/images/room-standard-2.jpg", "/images/room-twin.jpg"],
+    meta: ["1 Double bed", "Up to 2 adults", "Attached bathroom"],
+    text: "A clean, comfortable room for solo travellers and couples on the move — fresh linen, an attached bathroom with hot water and room service from our kitchen.",
+    features: ["Double bed with fresh linen", "Attached bathroom", "Hot & cold water", "Room service", "Daily housekeeping", "Free parking"],
   },
 ];
 
@@ -174,28 +200,57 @@ export const inEveryRoom = [
 export const restaurant = {
   text: "Our ground-floor restaurant serves fresh, home-style food all day — hot breakfasts, North Indian thalis, Bihari favourites and quick meals for travellers in a hurry. Open to hotel guests and walk-in diners alike.",
   // Dishes guests mention in Google reviews. TODO: owner to confirm / add the full menu.
+  // The dish photos are stock photos from Wikimedia Commons, not taken at the hotel: `credit` is listed on /credits,
+  // which /dining links to (the licences require it). TODO: replace them with photos of our own food and drop the credits.
   dishes: [
-    { title: "Kadhai Chicken", text: "A guest favourite — rich, spicy and best with hot tandoori roti." },
-    { title: "Dal Tadka", text: "Yellow dal finished with a smoky tadka of ghee, garlic and jeera." },
-    { title: "Kadhai Paneer & Veg Jalfrezi", text: "Paneer and fresh vegetables tossed with peppers and masala." },
-    { title: "Tandoori Roti", text: "Fresh off the tandoor — 'amongst the best I've had', says one guest." },
-    { title: "Pyaj Pakoda & Chai", text: "Crispy onion pakodas with hot tea — the perfect highway stop." },
-    { title: "Lassi & Chaach", text: "Cool, fresh lassi and spiced chaach to beat the heat." },
+    {
+      title: "Kadhai Chicken",
+      text: "A guest favourite — rich, spicy and best with hot tandoori roti.",
+      image: "/images/food-kadhai-chicken.jpg",
+      credit: { by: "AugustineKajur", page: "https://commons.wikimedia.org/wiki/File:Kadai_Chicken-NCR.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0" },
+    },
+    {
+      title: "Dal Tadka",
+      text: "Yellow dal finished with a smoky tadka of ghee, garlic and jeera.",
+      image: "/images/food-dal-tadka.jpg",
+      credit: { by: "AugustineKajur", page: "https://commons.wikimedia.org/wiki/File:Dal_Tadka-Delhi.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0" },
+    },
+    {
+      title: "Kadhai Paneer & Veg Jalfrezi",
+      text: "Paneer and fresh vegetables tossed with peppers and masala.",
+      image: "/images/food-kadhai-paneer.jpg",
+      credit: { by: "Yummy O Yummy", page: "https://commons.wikimedia.org/wiki/File:Kadai_Paneer_(15913018051).jpg", licence: "CC BY 2.0", licenceUrl: "https://creativecommons.org/licenses/by/2.0" },
+    },
+    {
+      title: "Tandoori Roti",
+      text: "Fresh off the tandoor — 'amongst the best I've had', says one guest.",
+      image: "/images/food-tandoori-roti.jpg",
+      credit: { by: "Ravi Dwivedi", page: "https://commons.wikimedia.org/wiki/File:Tandoori-rotis.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0" },
+    },
+    {
+      title: "Pyaj Pakoda & Chai",
+      text: "Crispy onion pakodas with hot tea — the perfect highway stop.",
+      image: "/images/food-pyaj-pakoda.jpg",
+      credit: { by: "Babu iyer", page: "https://commons.wikimedia.org/wiki/File:Onion_pakora_-_a.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0" },
+    },
+    {
+      title: "Lassi & Chaach",
+      text: "Cool, fresh lassi and spiced chaach to beat the heat.",
+      image: "/images/food-lassi.jpg",
+      credit: { by: "Jashjashjash", page: "https://commons.wikimedia.org/wiki/File:KulladLassi-StreetFood-DelhiNCR11.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0" },
+    },
   ],
   extras: ["Group meals for buses & travellers", "Room service for hotel guests", "Catering for banquet events"],
-  image: "/images/restaurant-hall.jpg",
+  image: "/images/restaurant-hall-3.jpg",
 };
 
 export const banquet = {
   text: "Celebrate weddings, receptions, birthdays, tilak, mundan and corporate get-togethers in our banquet hall. We take care of seating, décor coordination and catering from our own kitchen, so you can focus on your guests.",
   capacity: null, // TODO: e.g. "Up to 200 guests"
   photos: [
-    { src: "/images/banquet-hall-2.jpg", alt: "Banquet hall decorated for a function" },
-    { src: "/images/banquet-stage-heart.jpg", alt: "Floral heart stage" },
-    { src: "/images/banquet-hall-1.jpg", alt: "Hall seating with decorated stage" },
-    { src: "/images/banquet-stage-1.jpg", alt: "Colourful stage decoration" },
-    { src: "/images/banquet-hall-3.jpg", alt: "Banquet hall with stage" },
-    { src: "/images/banquet-stage-2.jpg", alt: "Stage with balloon decoration" },
+    { src: "/images/banquet-stage-2.jpg", alt: "Stage drapes and chandeliers" },
+    { src: "/images/banquet-hall-3.jpg", alt: "Banquet hall floor and stage" },
+    { src: "/images/banquet-lounge.jpg", alt: "Lounge seating beside the hall" },
   ],
   events: [
     { icon: "ring", title: "Weddings & Receptions", text: "Shaadi, reception and baraat stays with rooms for your guests." },

@@ -5,18 +5,18 @@ import GalleryGrid from "../components/GalleryGrid";
 import { hotel } from "../data/site";
 
 export const metadata = pageMeta({
-  title: "Photo Gallery",
+  title: "Photo & Video Gallery",
   description:
-    "Photos of Hotel Sher-e-Bihar, Sherghati: the building on GT Road, our rooms, restaurant and decorated banquet hall.",
+    "Photos and short video walkthroughs of Hotel Sher-e-Bihar, Sherghati: the building on GT Road, our rooms, restaurant and banquet hall.",
   path: "/gallery",
-  image: "/og/gallery.jpg",
+  image: "/og/gallery-v4.jpg",
 });
 
 export default function GalleryPage() {
   return (
     <>
       <JsonLd data={breadcrumbLd("Gallery", "/gallery")} />
-      <PageHero title="Our Gallery" sub={`A look inside ${hotel.name}`} image="/images/banquet-hall-1.jpg" />
+      <PageHero title="Our Gallery" sub={`A look inside ${hotel.name}`} image="/images/room-family-5.jpg" />
       <GalleryGrid />
     </>
   );

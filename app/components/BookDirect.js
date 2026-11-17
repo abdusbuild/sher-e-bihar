@@ -20,8 +20,8 @@ export default function BookDirect() {
             </a>
           </div>
         </div>
-        <div className="media-split__img framed reveal" style={{ "--d": ".15s" }}>
-          <Photo src="/images/exterior-day.jpg" alt="Hotel Sher-e-Bihar on the GT Road" />
+        <div className="media-split__img media-split__img--tall framed reveal" style={{ "--d": ".15s" }}>
+          <Photo src="/images/exterior-forecourt.jpg" alt="Hotel Sher-e-Bihar on the GT Road" />
         </div>
       </div>
     </section>

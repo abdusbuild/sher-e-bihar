@@ -12,14 +12,14 @@ export const metadata = pageMeta({
   description:
     "Book our banquet hall in Sherghati for weddings, receptions, tilak, birthdays and corporate events, with in-house catering, décor help and rooms for guests.",
   path: "/banquet",
-  image: "/og/banquet-v2.jpg",
+  image: "/og/banquet-v4.jpg",
 });
 
 export default function BanquetPage() {
   return (
     <>
       <JsonLd data={breadcrumbLd("Banquet Hall", "/banquet")} />
-      <PageHero title="Banquet Hall" sub="Weddings, parties & family functions" image="/images/banquet-hall-2.jpg" />
+      <PageHero title="Banquet Hall" sub="Weddings, parties & family functions" image="/images/banquet-stage-2.jpg" />
       <Banquet />
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">

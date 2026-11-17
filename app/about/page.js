@@ -14,7 +14,7 @@ export const metadata = pageMeta({
   description:
     "The story of Hotel Sher-e-Bihar, a family-run hotel, restaurant and banquet hall on GT Road in Sherghati: clean rooms, honest food and warm Bihari hospitality.",
   path: "/about",
-  image: "/og/about.jpg",
+  image: "/og/about-v3.jpg",
 });
 
 export default function About() {
@@ -24,7 +24,7 @@ export default function About() {
       <PageHero
         title="About Us"
         sub="Hospitality on the Grand Trunk Road"
-        image="/images/exterior-dusk.jpg"
+        image="/images/exterior-front.jpg"
         stats={[
           { value: "437", label: "Google reviews" },
           { value: "24/7", label: "Open all day" },
@@ -34,7 +34,7 @@ export default function About() {
       <PerfectFor
         title="We Are The Perfect Stop For"
         text={`${hotel.name} is a family-run hotel, restaurant and banquet hall on NH-19 at Akauna, Sherghati. Whether you're a pilgrim on the way to Bodh Gaya, a family on a long drive, a wedding party or a trucker needing a clean bed and a hot meal, our doors on the GT Road are open for you.`}
-        image="/images/exterior-night.jpg"
+        image="/images/exterior-entrance.jpg"
       />
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap promise">

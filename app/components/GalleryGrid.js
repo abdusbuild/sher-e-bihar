@@ -1,7 +1,8 @@
-import { galleryCats, hotel, photos } from "../data/site";
+import { galleryCats, hotel, photos, videos } from "../data/site";
 import Icon from "./Icon";
 import { PhotoGrid } from "./Lightbox";
 import Title from "./Title";
+import { VideoRow } from "./VideoGrid";
 
 // Gallery page: filter pills + photo grid + lightbox.
 export default function GalleryGrid() {
@@ -19,6 +20,13 @@ export default function GalleryGrid() {
           </div>
           <PhotoGrid items={photos} id="gallery" />
         </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="wrap">
+          <Title sub="Short walkthroughs of the hotel. Tap a clip to play.">Video Tour</Title>
+        </div>
+        <VideoRow items={videos} label="Video tour" />
       </section>
 
       <section className="section" style={{ paddingTop: 0 }}>

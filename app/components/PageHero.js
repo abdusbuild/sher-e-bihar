@@ -2,7 +2,7 @@ import Link from "next/link";
 import Img from "./Img";
 
 // Inner-page banner: dark photo, Aboreto title, amber subtitle, optional breadcrumb and stats.
-export default function PageHero({ title, sub, image = "/images/exterior-dusk.jpg", stats, breadcrumb = false }) {
+export default function PageHero({ title, sub, image = "/images/exterior-front.jpg", stats, breadcrumb = false }) {
   return (
     <section className="page-hero">
       <div className="page-hero__bg">

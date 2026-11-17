@@ -26,31 +26,63 @@ export function EnquireEvent() {
   );
 }
 
-// Home page: two alternating photo and text rows that lead to /banquet.
+// Home page: one self-advancing photo slider beside the list of occasions, leading to /banquet.
 function BanquetTeaser() {
-  const rows = [
-    { event: banquet.events[0], src: "/images/banquet-hall-1.jpg", alt: "Banquet hall seating with decorated stage" },
-    { event: banquet.events[1], src: "/images/banquet-stage-heart.jpg", alt: "Floral heart stage" },
+  const photos = [
+    { src: "/images/banquet-stage-2.jpg", alt: "Stage drapes and chandeliers" },
+    { src: "/images/banquet-hall-3.jpg", alt: "Banquet hall floor and stage" },
+    { src: "/images/banquet-hall-4.jpg", alt: "Banquet hall from the entrance" },
+    { src: "/images/banquet-lounge.jpg", alt: "Lounge seating beside the hall" },
   ];
   return (
     <section className="section">
       <div className="wrap">
         <Title sub={banquet.text}>Weddings &amp; Celebrations</Title>
-        <div className="rows">
-          {rows.map(({ event, src, alt }, i) => (
-            <div key={event.title} className={`media-split ${i % 2 ? "media-split--rev" : ""}`}>
-              <div className="reveal">
-                <h3 className="subhead">{event.title}</h3>
-                <p>{event.text}</p>
-                <Link href="/banquet" className="arrow-link">
-                  View Details <Icon name="arrow" />
-                </Link>
-              </div>
-              <div className="media-split__img reveal" style={{ "--d": ".15s" }}>
-                <Photo src={src} alt={alt} />
+        <div className="celebrate">
+          {/* SiteScripts moves it on every 3 seconds, looping forever, and wires up the arrows, bars and swipe */}
+          <div className="slider reveal" data-slider>
+            <div className="slider__view" role="group" aria-label="Banquet hall photos">
+              {photos.map((p, i) => (
+                <figure key={p.src} className={i ? "slider__slide" : "slider__slide is-on"}>
+                  <Photo src={p.src} alt={p.alt} sizes="(max-width: 860px) 100vw, 60vw" />
+                </figure>
+              ))}
+              <div className="slider__bars" aria-hidden="true">
+                {photos.map((p, i) => (
+                  <span key={p.src} className={i ? undefined : "is-on"} />
+                ))}
               </div>
             </div>
-          ))}
+            <div className="slider__foot">
+              <p data-slider-cap>{photos[0].alt}</p>
+              <div className="slider__nav">
+                <button type="button" className="peek__btn" data-slider-prev aria-label="Previous banquet photo">
+                  <Icon name="arrow" className="ico--flip" />
+                </button>
+                <span data-slider-count>1 / {photos.length}</span>
+                <button type="button" className="peek__btn" data-slider-next aria-label="Next banquet photo">
+                  <Icon name="arrow" />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="celebrate__body reveal" style={{ "--d": ".15s" }}>
+            <ul className="occasions">
+              {banquet.events.map((e) => (
+                <li key={e.title}>
+                  <Icon name={e.icon} />
+                  <h3>{e.title}</h3>
+                  <p>{e.text}</p>
+                </li>
+              ))}
+            </ul>
+            <div className="celebrate__actions">
+              <EnquireEvent />
+              <Link href="/banquet" className="arrow-link">
+                View Details <Icon name="arrow" />
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

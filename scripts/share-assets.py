@@ -22,13 +22,13 @@ MARK = "SB"
 # file: (photo in public/images, crop left, crop top, crop width in the photo's pixels, caption)
 # Always the real published photos. WhatsApp can crop a preview to its centre square, so the subject and text sit mid-frame.
 OG_CARDS = {
-    "home": ("exterior-dusk", 0, 0, 1240, "Hotel, Restaurant & Banquet · Sherghati, Gaya"),
-    "rooms": ("room-double-2", 0, 18, 1280, "AC, Standard & Family Rooms"),
-    "banquet-v2": ("banquet-hall-3", 151, 0, 908, "Wedding & Banquet Hall"),
-    "dining": ("restaurant-hall", 0, 100, 1280, "Restaurant on GT Road"),
-    "about": ("exterior-day", 0, 60, 714, "A Family-Run Hotel in Sherghati"),
-    "contact": ("exterior-dusk", 640, 470, 960, "Contact & Directions · NH-19, Sherghati"),
-    "gallery": ("banquet-stage-heart", 0, 60, 1280, "Photo Gallery"),
+    "home-v3": ("exterior-front", 0, 40, 2000, "Hotel, Restaurant & Banquet · Sherghati, Gaya"),
+    "rooms-v3": ("room-suite-1", 0, 140, 2000, "AC, Standard & Family Rooms"),
+    "banquet-v4": ("banquet-stage-2", 0, 0, 2000, "Wedding & Banquet Hall"),
+    "dining-v3": ("restaurant-hall-1", 0, 200, 2000, "Restaurant on GT Road"),
+    "about-v3": ("exterior-forecourt", 0, 60, 1500, "A Family-Run Hotel in Sherghati"),
+    "contact-v3": ("exterior-entrance", 0, 760, 1500, "Contact & Directions · NH-19, Sherghati"),
+    "gallery-v4": ("room-family-5", 0, 1150, 2000, "Photo Gallery"),
 }
 
 

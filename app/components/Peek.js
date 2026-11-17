@@ -3,9 +3,9 @@ import Icon from "./Icon";
 
 // Swipeable photo row where the next slide peeks in from the edge, with arrows and a "1 / 3" counter.
 // Each child should be a <figure className="peek__slide">. SiteScripts wires up the arrows and counter.
-export default function Peek({ label, children, showCount = true }) {
+export default function Peek({ label, children, showCount = true, className = "" }) {
   return (
-    <div className="peek reveal" data-peek>
+    <div className={`peek reveal ${className}`.trim()} data-peek>
       <div className="peek__track" role="group" aria-label={label} tabIndex={0}>
         {children}
       </div>

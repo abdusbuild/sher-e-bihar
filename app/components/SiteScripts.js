@@ -139,6 +139,71 @@ export default function SiteScripts() {
       paint();
     });
 
+    /* Video clips: starting one pauses any other that is playing ("play" doesn't bubble, so it is caught on the way down) */
+    on(document, "play", (e) => {
+      if (!e.target.matches?.("video[controls]")) return;
+      $$("video[controls]").forEach((v) => v !== e.target && !v.paused && v.pause());
+    }, true);
+
+    /* Photo slider (home banquet section): one photo at a time, moving on every 3s and looping forever.
+       Only the outgoing and incoming photos move, so the loop has no end to rewind from.
+       Hovering holds it; arrows and a touch swipe change the photo. No auto-advance with reduced motion. */
+    $$("[data-slider]").forEach((root) => {
+      const slides = $$(".slider__slide", root);
+      const bars = $$(".slider__bars span", root);
+      const cap = $("[data-slider-cap]", root);
+      const count = $("[data-slider-count]", root);
+      if (slides.length < 2) return;
+      const MOVE = reduceMotion ? 0 : 800; // matches the CSS transition
+      let idx = Math.max(0, slides.findIndex((s) => s.classList.contains("is-on")));
+      let busy = 0;
+      let hovered = false;
+      let last = Date.now();
+      // dir 1 brings the new photo in from the right, -1 from the left
+      const go = (n, dir) => {
+        n = (n + slides.length) % slides.length;
+        if (busy || n === idx) return;
+        const from = slides[idx];
+        const to = slides[n];
+        to.style.transition = "none";
+        to.style.transform = `translateX(${dir * 100}%)`;
+        to.classList.add("is-on");
+        void to.offsetWidth; // the start position has to apply before the move begins
+        to.style.transition = "";
+        to.style.transform = "translateX(0)";
+        from.style.transform = `translateX(${-dir * 100}%)`;
+        bars.forEach((b, i) => b.classList.toggle("is-on", i === n));
+        if (cap) cap.textContent = $("img", to)?.alt || "";
+        if (count) count.textContent = `${n + 1} / ${slides.length}`;
+        idx = n;
+        last = Date.now();
+        busy = setTimeout(() => {
+          busy = 0;
+          from.classList.remove("is-on");
+          from.style.transform = "";
+        }, MOVE + 40);
+      };
+      cleanups.push(() => clearTimeout(busy));
+      on($("[data-slider-prev]", root), "click", () => go(idx - 1, -1));
+      on($("[data-slider-next]", root), "click", () => go(idx + 1, 1));
+      on(root, "pointerenter", (e) => e.pointerType === "mouse" && (hovered = true));
+      on(root, "pointerleave", () => (hovered = false));
+      let x0 = null;
+      on(root, "touchstart", (e) => (x0 = e.touches[0].clientX), { passive: true });
+      on(root, "touchend", (e) => {
+        const dx = x0 === null ? 0 : e.changedTouches[0].clientX - x0;
+        x0 = null;
+        if (Math.abs(dx) > 40) go(idx - Math.sign(dx), -Math.sign(dx));
+      });
+      if (reduceMotion) return;
+      every(() => {
+        if (hovered || busy || document.hidden || Date.now() - last < 3000 || $(".lightbox.is-open")) return;
+        const r = root.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        go(idx + 1, 1);
+      }, 250);
+    });
+
     /* Hero background crossfade */
     const heroImgs = $$(".hero__bg img");
     if (heroImgs.length > 1) {
@@ -298,7 +363,7 @@ export default function SiteScripts() {
       const lbImg = $("img", lb);
       const lbCap = $(".lightbox__cap", lb);
       const lbCount = $(".lightbox__count", lb);
-      const zoomable = "[data-lightbox], .img-marquee img, .media-split__img img, .showcase__img img, .room-detail__tile img, .peek__img img, .dine__img img, .arch img";
+      const zoomable = "[data-lightbox], .img-marquee img, .media-split__img img, .showcase__img img, .room-detail__tile img, .peek__img img, .slider__slide img, .dine__img img, .dish__img img, .arch img";
       const srcOf = (el) => el.getAttribute("href") || el.dataset.full || el.currentSrc || el.getAttribute("src");
       const capOf = (el) => el.getAttribute("data-caption") || el.getAttribute("alt") || "";
       // Gallery links count once (not the <img> inside them); filtered-out gallery items are skipped.

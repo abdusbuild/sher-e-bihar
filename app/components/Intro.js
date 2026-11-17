@@ -3,7 +3,7 @@ import { heroStats, hotel } from "../data/site";
 import Icon from "./Icon";
 import Photo from "./Photo";
 
-// Opening block of the home page: holds the page's <h1>, with a photo in the arch shape.
+// Opening block of the home page: holds the page's <h1>, with a photo in a leaf shape (two opposite corners rounded).
 export default function Intro() {
   return (
     <section className="section">
@@ -31,8 +31,8 @@ export default function Intro() {
             About Us <Icon name="arrow" />
           </Link>
         </div>
-        <div className="arch reveal" style={{ "--d": ".15s" }}>
-          <Photo src="/images/exterior-night.jpg" alt="Hotel Sher-e-Bihar lit up at night" sizes="(max-width: 860px) min(78vw, 380px), 440px" />
+        <div className="leaf reveal" style={{ "--d": ".15s" }}>
+          <Photo src="/images/exterior-entrance.jpg" alt="Hotel Sher-e-Bihar seen from the GT Road forecourt" sizes="(max-width: 860px) min(78vw, 380px), 440px" />
         </div>
       </div>
     </section>
