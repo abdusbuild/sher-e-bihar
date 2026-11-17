@@ -40,14 +40,17 @@ export default function RoomsPage() {
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
           <Title sub="Little comforts that come with every stay.">In Every Room</Title>
-          <div className="cards" data-stagger=".08">
-            {inEveryRoom.map((a) => (
-              <div key={a.title} className="card reveal">
-                <Icon name={a.icon} />
-                <h3>{a.title}</h3>
-                <p>{a.text}</p>
-              </div>
-            ))}
+          {/* Endless auto-sliding row: the list is rendered twice so SiteScripts can loop it seamlessly */}
+          <div className="card-loop reveal" data-loop role="group" aria-label="In every room">
+            <div className="card-loop__track">
+              {[...inEveryRoom, ...inEveryRoom].map((a, i) => (
+                <div key={i} className="card" aria-hidden={i >= inEveryRoom.length || undefined}>
+                  <Icon name={a.icon} />
+                  <h3>{a.title}</h3>
+                  <p>{a.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="center">
             <span className="tip reveal">

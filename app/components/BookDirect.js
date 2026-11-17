@@ -5,7 +5,7 @@ import Photo from "./Photo";
 // Home page band: why booking by phone or WhatsApp is the better deal.
 export default function BookDirect() {
   return (
-    <section className="section band--stone">
+    <section className="section band--navy">
       <div className="wrap media-split">
         <div className="reveal">
           <span className="kicker">Best available rate</span>

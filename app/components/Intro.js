@@ -3,7 +3,7 @@ import { heroStats, hotel } from "../data/site";
 import Icon from "./Icon";
 import Photo from "./Photo";
 
-// Opening block of the home page: holds the page's <h1>, with a photo in a leaf shape (two opposite corners rounded).
+// Opening block of the home page: holds the page's <h1>, with a photo in a softly rounded portrait frame.
 export default function Intro() {
   return (
     <section className="section">

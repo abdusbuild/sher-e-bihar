@@ -98,7 +98,7 @@ export default function Contact({ map = false }) {
               </div>
             </div>
             <div className="uf">
-              <label htmlFor="c-email">Email</label>
+              <label htmlFor="c-email">Email (optional)</label>
               <input id="c-email" name="email" type="email" autoComplete="email" />
             </div>
             <div className="uf-row">

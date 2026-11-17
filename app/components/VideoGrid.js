@@ -1,7 +1,7 @@
 import Peek from "./Peek";
 
-// Short upright video clips. Each one loads only when the visitor presses play,
-// and SiteScripts pauses the others when one starts.
+// Short upright video clips. Nothing loads up front; SiteScripts plays a clip (muted) once it is on screen,
+// one at a time, and pauses it when it scrolls away.
 function Clip({ v }) {
   return <video src={v.src} poster={v.poster} controls muted playsInline preload="none" aria-label={v.title} />;
 }

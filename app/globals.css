@@ -1152,8 +1152,8 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .intro-stats .stat-big { text-align: left; }
 .intro-stats .stat-big b { font-size: clamp(1.7rem, 2.6vw, 2.2rem); font-weight: 300; letter-spacing: .03em; color: var(--navy); }
 .intro-stats .stat-big span { color: var(--muted); letter-spacing: .08em; font-size: 12px; }
-.leaf { justify-self: end; width: min(100%, 440px); aspect-ratio: 10/13; overflow: hidden; border-radius: clamp(80px, 12vw, 140px) 0; }
-.leaf > :is(img, .ph) { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.leaf { justify-self: end; width: min(100%, 440px); aspect-ratio: 4/5; overflow: hidden; border-radius: var(--radius); }
+.leaf > :is(img, .ph) { width: 100%; height: 100%; object-fit: cover; object-position: center top; cursor: zoom-in; }
 
 /* Peek carousel */
 .peek__track { position: relative; display: flex; gap: clamp(14px, 2.4vw, 32px); overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); padding-inline: var(--gutter); scrollbar-width: none; overscroll-behavior-x: contain; }
@@ -1168,11 +1168,6 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .peek figcaption small { display: block; margin-top: 4px; font-family: var(--f-body); font-size: .86rem; letter-spacing: 0; text-transform: none; color: var(--muted); }
 .peek__book { color: var(--amber-700); font-size: 13.5px; border-bottom: 1px solid currentColor; }
 .peek__book:hover { color: var(--navy); }
-.peek__nav { display: flex; align-items: center; justify-content: flex-end; gap: 14px; margin-top: 10px; padding-inline: var(--gutter); font-family: var(--f-display); font-size: 15px; letter-spacing: .1em; color: var(--ink); }
-.peek__btn { display: grid; place-items: center; width: 44px; height: 44px; color: var(--navy); transition: transform .25s; }
-.peek__btn .ico { width: 24px; height: 24px; stroke-width: 1.3; }
-.peek__btn:hover { transform: translateX(3px); }
-.peek__btn[data-peek-prev]:hover { transform: translateX(-3px); }
 .ico--flip { transform: scaleX(-1); }
 /* Dining page menu cards: photo on top, then the dish name and a line about it */
 .card.dish { padding: 0 0 22px; overflow: hidden; }
@@ -1211,7 +1206,6 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .slider__bars span.is-on { background: #fff; }
 .slider__foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 8px; }
 .section .slider__foot p { margin: 0; font-family: var(--f-ui); font-size: 14.5px; letter-spacing: .02em; text-transform: uppercase; color: var(--ink); }
-.slider__nav { display: flex; align-items: center; gap: 10px; flex-shrink: 0; font-family: var(--f-ui); font-size: 15px; letter-spacing: .12em; color: var(--ink); }
 .occasions { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid var(--line); }
 .occasions li { display: grid; grid-template-columns: 34px minmax(0, 1fr); column-gap: 18px; padding: 18px 0; border-top: 1px solid var(--line); }
 .occasions .ico { grid-row: span 2; width: 34px; height: 34px; margin-top: 2px; color: var(--navy); stroke-width: 1.2; }
@@ -1279,6 +1273,15 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .page-hero__bg img[data-full="/images/exterior-front.jpg"] { object-position: center top; }
 /* Upright photo: show the beds, not the ceiling */
 .page-hero__bg img[data-full="/images/room-family-5.jpg"] { object-position: center 72%; }
+/* Banquet stage: skip the bare ceiling, frame chandeliers + full décor wall */
+.page-hero__bg img[data-full="/images/banquet-stage-2.jpg"] { object-position: center 68%; }
+/* Dining hero: keep the paneer bowl and rotis in frame */
+.page-hero__bg img[data-full="/images/food-kadhai-paneer.jpg"] { object-position: center 40%; }
+/* Full-photo banner (About): taller, whole picture shown, blurred copy behind */
+.page-hero--full { height: clamp(460px, 78vh, 680px); }
+.page-hero--full .page-hero__bg img { position: absolute; inset: 0; object-fit: contain; object-position: center; }
+.page-hero--full .page-hero__bg img.page-hero__fill { object-fit: cover; filter: blur(28px) brightness(.8); transform: scale(1.15); }
+.page-hero--full::after { background: linear-gradient(rgba(21, 13, 56, .3), rgba(21, 13, 56, .55)); }
 .stat-big b { font-weight: 300; letter-spacing: .03em; }
 
 /* Surfaces: softly rounded corners and hairlines */
@@ -1382,7 +1385,6 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
   .booking { margin-top: -40px; }
   .peek__slide { flex-basis: 86vw; }
   .peek__img { aspect-ratio: 4/3; }
-  .peek__nav { margin-top: 2px; }
   .sec-head h2, .title h2, .contact-title h2 { font-size: 1.65rem; letter-spacing: 2px; }
   .sec-head .btn-outline { padding: 9px 14px; font-size: 13px; }
   .amen__item p { display: none; }
@@ -1433,7 +1435,7 @@ h1, h2, h3, h4,
 
 /* UI text in Questrial: buttons, nav, small labels */
 .btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit, .pill, .navbar__book,
-.arrow-link, .nav-pill a, .navbar__place, .navbar__call, .kicker, .showcase__tag, .drawer__head, .drawer__highlights a, .enquire-fab, .peek__nav {
+.arrow-link, .nav-pill a, .navbar__place, .navbar__call, .kicker, .showcase__tag, .drawer__head, .drawer__highlights a, .enquire-fab {
   font-family: var(--f-ui); font-weight: 400; letter-spacing: .12em;
 }
 
@@ -1441,13 +1443,11 @@ h1, h2, h3, h4,
 .btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit, .navbar__book, .pill {
   transition: transform .3s var(--ease-nb), background .3s var(--ease-nb), background-position .5s var(--ease-nb), color .3s var(--ease-nb), border-color .3s var(--ease-nb), box-shadow .3s var(--ease-nb);
 }
-.btn-gold, .btn-black, .section .btn-white, .btn-submit {
-  background-image: linear-gradient(to right, var(--navy) 0%, var(--navy) 50%, var(--amber-500) 50%, var(--amber-300) 100%);
-  background-size: 200% 100%; background-position: 0 0;
-}
+/* Primary buttons: navy at rest; on hover a deeper navy fills up from the bottom and they lift */
 .btn-gold:hover, .btn-black:hover, .section .btn-white:hover, .btn-submit:hover {
-  background-position: 100% 0; border-color: var(--amber-400); color: #000;
-  transform: scale(1.05); box-shadow: 0 14px 26px -12px rgba(254, 154, 0, .55);
+  border-color: var(--navy-900); color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -12px rgba(33, 21, 81, .55);
 }
 .btn-outline:hover, .section .btn-outline:hover, .btn-outline-amber:hover, .btn-gradient:hover {
   transform: scale(1.05); box-shadow: 0 14px 26px -14px rgba(0, 0, 0, .45);
@@ -1470,7 +1470,7 @@ h1, h2, h3, h4,
 .nav-pill a:hover::after { background: var(--amber-400); }
 
 /* Small round controls pop slightly */
-.peek__btn, .testi__btn, .lightbox__btn, .modal__close { transition: transform .3s var(--ease-nb), background .3s, color .3s; }
+.testi__btn, .lightbox__btn, .modal__close { transition: transform .3s var(--ease-nb), background .3s, color .3s; }
 .testi__btn:hover, .lightbox__btn:hover, .modal__close:hover { transform: scale(1.1); }
 
 /* Cards lift with a warm glow; photos zoom slowly */
@@ -1526,7 +1526,6 @@ h1, h2, h3, h4,
   .amen__item { gap: 12px; }
   .acc__q { padding: 22px 0; line-height: 1.45; }
   .acc__a p { padding-bottom: 8px; }
-  .peek__nav { margin-top: 12px; }
   .peek figcaption { padding-top: 14px; gap: 10px; }
   .card { padding: 22px; }
 
@@ -1552,3 +1551,77 @@ h1, h2, h3, h4,
   .places__list b { font-size: 1.05rem; letter-spacing: .04em; }
   .faq-aside__text { font-size: 1.25rem; }
 }
+
+/* Heavier headings site-wide: Aboreto ships one thin weight, so a hairline stroke
+   (scaled to the font size) thickens the letters without the browser's faux bold */
+h1, h2, h3, h4, .subhead, .rotator-title { -webkit-text-stroke: .035em currentColor; }
+.legal-toc h2 { -webkit-text-stroke: 0; }
+
+/* Nav links a touch heavier (Questrial also ships one weight) */
+.nav-pill a { -webkit-text-stroke: .025em currentColor; }
+
+/* CTA labels get the same slight weight as the nav */
+.btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit,
+.navbar__book, .arrow-link, .peek__book { -webkit-text-stroke: .025em currentColor; }
+
+/* CTA hover: the hover colour fills the button from the bottom up instead of switching at once.
+   :is() takes the specificity of its strongest selector, so these beat every older hover `background`. */
+.btn-gold, .btn-black, .section .btn-white, .btn-submit { --fill: var(--navy-900); }
+.btn-outline, .section .btn-outline, .btn-outline-amber, .btn-gradient { --fill: var(--navy); }
+.section .getting .btn-outline { --fill: #fff; }
+.navbar__book { --fill: var(--gold-hover); }
+:is(.btn-gold, .btn-black, .section .btn-white, .btn-submit, .btn-outline, .section .btn-outline, .btn-outline-amber, .btn-gradient, .section .getting .btn-outline, .navbar__book) {
+  background-image: linear-gradient(var(--fill), var(--fill));
+  background-repeat: no-repeat; background-position: 50% 100%; background-size: 100% 0;
+  transition: transform .3s var(--ease-nb), background-size .45s var(--ease-nb), color .3s var(--ease-nb), border-color .3s var(--ease-nb), box-shadow .3s var(--ease-nb);
+}
+/* keep the resting colour underneath while the fill rises */
+:is(.btn-gold, .btn-black, .section .btn-white, .btn-submit):hover { background-color: var(--navy); }
+:is(.btn-outline, .section .btn-outline, .btn-outline-amber, .btn-gradient, .section .getting .btn-outline):hover { background-color: transparent; }
+.navbar__book:hover { background-color: #fff; }
+:is(.btn-gold, .btn-black, .section .btn-white, .btn-submit, .btn-outline, .section .btn-outline, .btn-outline-amber, .btn-gradient, .section .getting .btn-outline, .navbar__book):hover {
+  background-image: linear-gradient(var(--fill), var(--fill));
+  background-repeat: no-repeat; background-position: 50% 100%; background-size: 100% 100%;
+}
+
+/* Navy band (home "Book direct"): light text, inverted buttons, soft light frame round the photo */
+.band--navy { background: var(--navy); color: #fff; }
+.band--navy .subhead { color: #fff; }
+.band--navy .kicker { color: var(--gold); }
+.band--navy p { color: rgba(255, 255, 255, .78); }
+.band--navy .framed { background: rgba(255, 255, 255, .1); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .18); }
+.band--navy .btn-gold { --fill: var(--gold); background-color: #fff; border-color: #fff; color: var(--navy); }
+.band--navy .btn-gold:hover { background-color: #fff; border-color: var(--gold); color: var(--navy); box-shadow: 0 12px 24px -12px rgba(0, 0, 0, .5); }
+.band--navy .btn-outline { --fill: #fff; border-color: rgba(255, 255, 255, .7); color: #fff; }
+.band--navy .btn-outline:hover { border-color: #fff; color: var(--navy); }
+
+/* Two-button CTA rows (book-direct band, room details) stay on one row on phones too */
+@media (max-width: 600px) {
+  :is(.band--navy, .room-detail) .btns { flex-wrap: nowrap; gap: 10px; }
+  :is(.band--navy, .room-detail) .btns > a { flex: 1 1 0; min-width: 0; padding-inline: 10px; white-space: nowrap; letter-spacing: .08em; }
+}
+
+/* Banquet teaser: "Enquire For Your Event" and "View Details" side by side on phones */
+@media (max-width: 600px) {
+  .celebrate__actions { flex-wrap: nowrap; gap: 14px; }
+  .celebrate__actions > .btn-gradient { flex: none; padding-inline: 14px; white-space: nowrap; font-size: 13px; letter-spacing: .06em; }
+  .celebrate__actions > .arrow-link { flex: none; white-space: nowrap; font-size: 13px; letter-spacing: .06em; }
+  .celebrate__actions .lbl-long { display: none; }
+}
+.lbl-short { display: none; }
+@media (max-width: 600px) { .celebrate__actions .lbl-short { display: inline; } }
+
+/* Card loop ("In every room"): 3 cards in view on desktop, 2 on tablets, 1 with the next peeking on phones.
+   SiteScripts slides it one card at a time and jumps back invisibly once the duplicate set is showing. */
+.card-loop { --gap: 24px; --per: 3; overflow: hidden; padding: 6px 0 12px; }
+.card-loop__track { display: flex; gap: var(--gap); transition: transform .8s var(--ease-nb); will-change: transform; }
+.card-loop__track > .card { flex: 0 0 calc((100% - (var(--per) - 1) * var(--gap)) / var(--per)); }
+@media (max-width: 900px) { .card-loop { --per: 2; } }
+@media (max-width: 600px) {
+  .card-loop { --gap: 14px; --per: 1.18; }
+  .card-loop__track > .card { padding: 24px 16px; }
+}
+
+/* About hero: 3-photo collage, wide version on landscape screens, stacked version on phones */
+.page-hero--collage .page-hero__bg picture img { object-fit: cover; object-position: center 20%; }
+@media (max-aspect-ratio: 1/1) { .page-hero--collage .page-hero__bg picture img { object-position: center top; } }

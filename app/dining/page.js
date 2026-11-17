@@ -20,7 +20,7 @@ export default function Dining() {
   return (
     <>
       <JsonLd data={breadcrumbLd("Dining", "/dining")} />
-      <PageHero title="Dining" sub="Fresh, home-style food all day" image="/images/restaurant-hall-3.jpg" />
+      <PageHero title="Dining" sub="Fresh, home-style food all day" image="/images/food-kadhai-paneer.jpg" />
       <Restaurant />
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">

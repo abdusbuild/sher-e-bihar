@@ -24,7 +24,9 @@ export default function About() {
       <PageHero
         title="About Us"
         sub="Hospitality on the Grand Trunk Road"
-        image="/images/exterior-front.jpg"
+        image="/images/about-collage-mobile.jpg"
+        desktopImage="/images/about-collage.jpg"
+        full
         stats={[
           { value: "437", label: "Google reviews" },
           { value: "24/7", label: "Open all day" },

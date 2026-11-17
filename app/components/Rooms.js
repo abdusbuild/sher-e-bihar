@@ -28,6 +28,9 @@ const slides = [
   ...all.filter((s) => !order.includes(s.src)),
 ];
 
+// Photos that show no bookable room, so their slide gets no booking button.
+const notRoom = ["/images/room-corridor.jpg", "/images/room-bathroom.jpg"];
+
 // Home page room carousel.
 export default function Rooms() {
   return (
@@ -44,7 +47,7 @@ export default function Rooms() {
           Rooms
         </SecHead>
       </div>
-      <Peek label="Rooms" showCount={false} className="peek--sm">
+      <Peek label="Rooms" className="peek--sm">
         {slides.map(({ src, alt, room: r }) => (
           <figure key={src} className="peek__slide">
             <div className="peek__img">
@@ -57,9 +60,11 @@ export default function Rooms() {
                 </Link>
                 {r && <small>{r.meta.join(" · ")}</small>}
               </div>
-              <a href="#" className="peek__book" data-open-modal data-room={r?.name}>
-                {r ? "Book this room" : "Book a room"}
-              </a>
+              {!notRoom.includes(src) && (
+                <a href="#" className="peek__book" data-open-modal data-room={r?.name}>
+                  {r ? "Book this room" : "Book a room"}
+                </a>
+              )}
             </figcaption>
           </figure>
         ))}

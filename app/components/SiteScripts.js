@@ -75,84 +75,213 @@ export default function SiteScripts() {
       revealEls.forEach((el) => el.classList.add("is-in"));
     }
 
-    /* Peek carousels: arrows and "1 / 3" counter. Swiping is native scroll-snap. */
-    $$("[data-peek]").forEach((root) => {
-      const track = $(".peek__track", root);
-      const slides = $$(".peek__slide", root);
-      const count = $("[data-peek-count]", root);
-      const padLeft = () => parseFloat(getComputedStyle(track).paddingLeft) || 0;
-      let idx = 0;
-      let raf = 0;
-      let moving = false;
-      const paint = () => {
-        if (moving) return; // the counter already shows where the row is heading
-        const x = track.scrollLeft + padLeft();
-        // The last slide can't reach the snap line (nothing follows it), so the end of the row counts as last
-        const atEnd = track.scrollLeft >= track.scrollWidth - track.clientWidth - 2;
-        idx = atEnd
-          ? slides.length - 1
-          : slides.reduce((best, s, i) => (Math.abs(s.offsetLeft - x) < Math.abs(slides[best].offsetLeft - x) ? i : best), 0);
-        if (count) count.textContent = `${idx + 1} / ${slides.length}`;
-      };
-      const settle = () => {
-        cancelAnimationFrame(raf);
-        moving = false;
+    /* Swipe rows (photo peeks, and card grids that turn into swipe rows on phones):
+       move on one slide every 3.5s, looping back to the start after the last one.
+       Holds while the row isn't scrollable (a card grid on a wide screen), while the mouse is over it,
+       for 3.5s after any swipe/drag/scroll by hand, while a clip in it is playing, and while it is
+       off screen or the tab is hidden. Off with reduced motion. */
+    const autoAdvance = (track, slides, busy = () => false) => {
+      if (reduceMotion || slides.length < 2) return;
+      const EVERY = 3500;
+      let last = Date.now();
+      let hovered = false;
+      let onScreen = false;
+      const touch = () => (last = Date.now());
+      on(track, "pointerenter", (e) => e.pointerType === "mouse" && (hovered = true));
+      on(track, "pointerleave", () => (hovered = false));
+      ["pointerdown", "touchstart", "wheel", "keydown"].forEach((ev) => on(track, ev, touch, { passive: true }));
+      const io = new IntersectionObserver(([en]) => (onScreen = en.isIntersecting), { threshold: 0.3 });
+      io.observe(track);
+      cleanups.push(() => io.disconnect());
+      const timer = setInterval(() => {
+        const max = track.scrollWidth - track.clientWidth;
+        if (max < 4 || hovered || busy() || !onScreen || document.hidden) return touch();
+        if ($$("video", track).some((v) => !v.paused)) return touch();
+        if (Date.now() - last < EVERY) return;
+        const cs = getComputedStyle(track);
+        const pad = parseFloat(cs.scrollPaddingLeft) || parseFloat(cs.paddingLeft) || 0;
+        const base = track.getBoundingClientRect().left - track.scrollLeft;
+        // each slide's scroll position, measured on screen so it works whatever the slide's offsetParent is
+        const at = slides.map((s) => s.getBoundingClientRect().left - base - pad);
+        const idx = at.reduce((best, x, i) => (Math.abs(x - track.scrollLeft) < Math.abs(at[best] - track.scrollLeft) ? i : best), 0);
+        // The last slide can't reach the snap line, so the end of the row loops back to the first
+        const to = track.scrollLeft >= max - 2 || idx >= slides.length - 1 ? 0 : Math.min(at[idx + 1], max);
+        track.scrollTo({ left: to, behavior: "smooth" });
+        last = Date.now();
+      }, 250);
+      cleanups.push(() => clearInterval(timer));
+    };
+
+    /* Card grids and the why-us perks become swipe rows on phones (CSS); they move on by themselves there */
+    $$(".cards:not(.cards--stack), .perks__grid").forEach((row) => autoAdvance(row, [...row.children]));
+
+    /* Peek carousels: move on by themselves (below); touch and trackpad swipe natively (scroll-snap). A mouse can click and drag the row;
+       snap is off while dragging or it would fight the hand, and a drag doesn't count as a click on a photo. */
+    $$("[data-peek] .peek__track").forEach((track) => {
+      let x0 = null;
+      let left0 = 0;
+      let dragged = false;
+      const end = () => {
+        if (x0 === null) return;
+        x0 = null;
         track.style.scrollSnapType = "";
+        track.style.cursor = "";
       };
-      // Arrows glide over 1.2s with an ease-in-out curve. Snap is off during the glide or it would fight the movement.
-      const go = (n) => {
-        idx = (n + slides.length) % slides.length;
-        const to = Math.min(slides[idx].offsetLeft - padLeft(), track.scrollWidth - track.clientWidth);
-        if (reduceMotion) {
-          track.scrollLeft = to;
-          return;
-        }
-        settle();
-        moving = true;
-        track.style.scrollSnapType = "none";
-        if (count) count.textContent = `${idx + 1} / ${slides.length}`;
-        const from = track.scrollLeft;
-        const start = performance.now();
-        const step = (now) => {
-          const p = Math.min(1, (now - start) / 1200);
-          const eased = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
-          track.scrollLeft = from + (to - from) * eased;
-          if (p < 1) raf = requestAnimationFrame(step);
-          else {
-            settle();
-            paint();
-          }
-        };
-        raf = requestAnimationFrame(step);
-      };
-      cleanups.push(settle);
-      // A finger on the row takes over from the glide
-      on(track, "pointerdown", () => {
-        if (!moving) return;
-        settle();
-        paint();
+      on(track, "pointerdown", (e) => {
+        if (e.pointerType !== "mouse" || e.button !== 0) return;
+        x0 = e.clientX;
+        left0 = track.scrollLeft;
+        dragged = false;
       });
-      on(track, "scroll", paint, { passive: true });
-      on(window, "resize", paint);
-      on($("[data-peek-prev]", root), "click", () => go(idx - 1));
-      on($("[data-peek-next]", root), "click", () => go(idx + 1));
-      paint();
+      on(track, "pointermove", (e) => {
+        if (x0 === null) return;
+        const dx = e.clientX - x0;
+        if (!dragged && Math.abs(dx) < 6) return;
+        if (!dragged) {
+          dragged = true;
+          track.style.scrollSnapType = "none";
+          track.style.cursor = "grabbing";
+        }
+        track.scrollLeft = left0 - dx;
+      });
+      on(window, "pointerup", end);
+      on(track, "pointerleave", end);
+      on(track, "dragstart", (e) => e.preventDefault()); // stop the browser dragging the image itself
+      on(track, "click", (e) => {
+        if (!dragged) return;
+        dragged = false;
+        e.preventDefault();
+        e.stopPropagation();
+      }, true);
+
+      autoAdvance(track, $$(".peek__slide", track), () => x0 !== null);
     });
 
-    /* Video clips: starting one pauses any other that is playing ("play" doesn't bubble, so it is caught on the way down) */
+    /* Card loops (rooms page "In every room"): slide one card every 3.5s, endlessly.
+       The cards are rendered twice; once the copy of the first card reaches the start, the row
+       jumps back to the real first card with no transition, so the loop never visibly rewinds.
+       Hovering holds it; a touch swipe moves it by hand. Off with reduced motion. */
+    $$("[data-loop]").forEach((root) => {
+      const track = $(".card-loop__track", root);
+      const cards = $$(".card", track);
+      const n = cards.length / 2;
+      if (reduceMotion || n < 2) return;
+      let idx = 0;
+      let hovered = false;
+      let onScreen = false;
+      let last = Date.now();
+      const step = () => cards[1].offsetLeft - cards[0].offsetLeft;
+      const place = (animate) => {
+        if (!animate) track.style.transition = "none";
+        track.style.transform = `translateX(${-idx * step()}px)`;
+        if (!animate) {
+          void track.offsetWidth; // apply the jump before turning the transition back on
+          track.style.transition = "";
+        }
+      };
+      const go = (to) => {
+        if (to < 0) {
+          // going back from the first card: jump to its copy first, then slide back one
+          idx = n;
+          place(false);
+          to = n - 1;
+        }
+        idx = to;
+        place(true);
+        last = Date.now();
+      };
+      on(track, "transitionend", (e) => {
+        if (e.target !== track || idx < n) return;
+        idx -= n;
+        place(false);
+      });
+      on(window, "resize", () => place(false));
+      on(root, "pointerenter", (e) => e.pointerType === "mouse" && (hovered = true));
+      on(root, "pointerleave", () => (hovered = false));
+      let x0 = null;
+      on(root, "touchstart", (e) => (x0 = e.touches[0].clientX), { passive: true });
+      on(root, "touchend", (e) => {
+        const dx = x0 === null ? 0 : e.changedTouches[0].clientX - x0;
+        x0 = null;
+        if (Math.abs(dx) > 40) go(dx < 0 ? idx + 1 : idx - 1);
+      });
+      const io = new IntersectionObserver(([en]) => (onScreen = en.isIntersecting), { threshold: 0.3 });
+      io.observe(root);
+      cleanups.push(() => io.disconnect());
+      const timer = setInterval(() => {
+        if (hovered || !onScreen || document.hidden) return (last = Date.now());
+        if (Date.now() - last >= 3500) go(idx + 1);
+      }, 250);
+      cleanups.push(() => clearInterval(timer));
+    });
+
+    /* Video clips: only one plays at a time ("play" doesn't bubble, so it is caught on the way down).
+       Pauses made here are flagged so they aren't mistaken for the visitor pressing pause. */
+    const clips = $$("video[controls]");
+    const autoPause = (v) => {
+      if (v.paused) return;
+      v.dataset.autoPause = "1";
+      v.pause();
+    };
     on(document, "play", (e) => {
       if (!e.target.matches?.("video[controls]")) return;
-      $$("video[controls]").forEach((v) => v !== e.target && !v.paused && v.pause());
+      clips.forEach((v) => v !== e.target && autoPause(v));
     }, true);
+
+    /* Clips play by themselves (muted) once they are on screen and pause when they leave it.
+       With several in view they take turns: when one ends, the next one in view starts.
+       A clip the visitor paused stays paused until they press play again.
+       Nothing autoplays with reduced motion or the browser's data saver on; nothing loads until it plays. */
+    const saveData = navigator.connection?.saveData;
+    if (clips.length && !reduceMotion && !saveData) {
+      const inView = new Set();
+      const userPaused = new Set();
+      const startable = (v) => inView.has(v) && !userPaused.has(v);
+      const tryPlay = (v) => v.play().catch(() => {}); // a browser that refuses autoplay just leaves the poster up
+      const pick = () => {
+        if (clips.some((v) => !v.paused && inView.has(v))) return;
+        const next = clips.find(startable);
+        if (next) tryPlay(next);
+      };
+      clips.forEach((v) => {
+        on(v, "pause", () => {
+          if (v.dataset.autoPause) delete v.dataset.autoPause;
+          else if (!v.ended) userPaused.add(v);
+        });
+        on(v, "play", () => userPaused.delete(v));
+        on(v, "ended", () => {
+          const i = clips.indexOf(v);
+          const next = [...clips.slice(i + 1), ...clips.slice(0, i + 1)].find(startable);
+          if (next) {
+            if (next === v) v.currentTime = 0;
+            tryPlay(next);
+          }
+        });
+      });
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach(({ target: v, isIntersecting }) => {
+            if (isIntersecting) inView.add(v);
+            else {
+              inView.delete(v);
+              autoPause(v);
+            }
+          });
+          pick();
+        },
+        { threshold: 0.6 }
+      );
+      clips.forEach((v) => io.observe(v));
+      cleanups.push(() => io.disconnect());
+    }
 
     /* Photo slider (home banquet section): one photo at a time, moving on every 3s and looping forever.
        Only the outgoing and incoming photos move, so the loop has no end to rewind from.
-       Hovering holds it; arrows and a touch swipe change the photo. No auto-advance with reduced motion. */
+       Hovering holds it; a touch swipe changes the photo. No auto-advance with reduced motion. */
     $$("[data-slider]").forEach((root) => {
       const slides = $$(".slider__slide", root);
       const bars = $$(".slider__bars span", root);
       const cap = $("[data-slider-cap]", root);
-      const count = $("[data-slider-count]", root);
       if (slides.length < 2) return;
       const MOVE = reduceMotion ? 0 : 800; // matches the CSS transition
       let idx = Math.max(0, slides.findIndex((s) => s.classList.contains("is-on")));
@@ -174,7 +303,6 @@ export default function SiteScripts() {
         from.style.transform = `translateX(${-dir * 100}%)`;
         bars.forEach((b, i) => b.classList.toggle("is-on", i === n));
         if (cap) cap.textContent = $("img", to)?.alt || "";
-        if (count) count.textContent = `${n + 1} / ${slides.length}`;
         idx = n;
         last = Date.now();
         busy = setTimeout(() => {
@@ -184,8 +312,6 @@ export default function SiteScripts() {
         }, MOVE + 40);
       };
       cleanups.push(() => clearTimeout(busy));
-      on($("[data-slider-prev]", root), "click", () => go(idx - 1, -1));
-      on($("[data-slider-next]", root), "click", () => go(idx + 1, 1));
       on(root, "pointerenter", (e) => e.pointerType === "mouse" && (hovered = true));
       on(root, "pointerleave", () => (hovered = false));
       let x0 = null;

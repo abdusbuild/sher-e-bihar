@@ -9,19 +9,9 @@ export default function Restaurant({ teaser = false }) {
   // Without it, the subhead becomes the page's h2 so the heading order stays h1 → h2.
   const Subhead = teaser ? "h3" : "h2";
   return (
-    <section className="section band--sand">
+    <section className="section">
       <div className="wrap">
-        {teaser && (
-          <SecHead
-            action={
-              <Link href="/dining" className="btn-outline">
-                Explore Dining
-              </Link>
-            }
-          >
-            Dining
-          </SecHead>
-        )}
+        {teaser && <SecHead>Dining</SecHead>}
         <div className="dine">
           <div className="reveal">
             <Subhead className="subhead">Fresh, Home-Style Food All Day</Subhead>
@@ -32,6 +22,13 @@ export default function Restaurant({ teaser = false }) {
                 <li key={d.title}>{d.title}</li>
               ))}
             </ul>
+            {teaser && (
+              <div className="btns" style={{ marginTop: 24 }}>
+                <Link href="/dining" className="btn-outline">
+                  Explore Dining
+                </Link>
+              </div>
+            )}
           </div>
           <div className="dine__img reveal" style={{ "--d": ".15s" }}>
             <Photo src={restaurant.image} alt="Restaurant at Hotel Sher-e-Bihar" sizes="(max-width: 860px) 100vw, 800px" />

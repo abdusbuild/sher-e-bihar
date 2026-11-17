@@ -21,7 +21,9 @@ function Cards({ items }) {
 export function EnquireEvent() {
   return (
     <a href="#" className="btn-gradient" data-open-modal data-room="Banquet / Event">
-      Enquire For Your Event
+      {/* the short label replaces the long one where a phone row is too narrow (see .celebrate__actions) */}
+      <span className="lbl-long">Enquire For Your Event</span>
+      <span className="lbl-short">Enquire Now</span>
     </a>
   );
 }
@@ -39,7 +41,7 @@ function BanquetTeaser() {
       <div className="wrap">
         <Title sub={banquet.text}>Weddings &amp; Celebrations</Title>
         <div className="celebrate">
-          {/* SiteScripts moves it on every 3 seconds, looping forever, and wires up the arrows, bars and swipe */}
+          {/* SiteScripts moves it on every 3 seconds, looping forever, and wires up the bars and swipe */}
           <div className="slider reveal" data-slider>
             <div className="slider__view" role="group" aria-label="Banquet hall photos">
               {photos.map((p, i) => (
@@ -55,15 +57,6 @@ function BanquetTeaser() {
             </div>
             <div className="slider__foot">
               <p data-slider-cap>{photos[0].alt}</p>
-              <div className="slider__nav">
-                <button type="button" className="peek__btn" data-slider-prev aria-label="Previous banquet photo">
-                  <Icon name="arrow" className="ico--flip" />
-                </button>
-                <span data-slider-count>1 / {photos.length}</span>
-                <button type="button" className="peek__btn" data-slider-next aria-label="Next banquet photo">
-                  <Icon name="arrow" />
-                </button>
-              </div>
             </div>
           </div>
           <div className="celebrate__body reveal" style={{ "--d": ".15s" }}>
