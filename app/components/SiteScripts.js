@@ -30,12 +30,25 @@ export default function SiteScripts() {
       cleanups.push(() => clearInterval(t));
     };
 
-    /* Navbar: adds a shadow once the page has scrolled. The Enquire button waits until the booking bar has passed. */
+    /* Navbar: adds a shadow once the page has scrolled. The Enquire button waits until the booking bar has passed.
+       On phones and small tablets (<=860px) the bar slides away while scrolling down and comes back on any scroll up.
+       It always shows near the top, while the menu is open, and when something in it has keyboard focus. */
     const nav = $(".navbar");
+    const small = window.matchMedia("(max-width: 860px)");
+    let lastY = window.scrollY;
     const onScroll = () => {
-      nav.classList.toggle("is-scrolled", window.scrollY > 30);
-      body.classList.toggle("is-past-fold", window.scrollY > 360);
+      const y = window.scrollY;
+      nav.classList.toggle("is-scrolled", y > 30);
+      body.classList.toggle("is-past-fold", y > 360);
+      const dy = y - lastY;
+      if (Math.abs(dy) < 6) return; // ignore tiny jitters (iOS bounce, address-bar resize)
+      const hide =
+        small.matches && dy > 0 && y > nav.offsetHeight + 40 &&
+        !body.classList.contains("menu-open") && !nav.contains(document.activeElement);
+      nav.classList.toggle("is-hidden", hide);
+      lastY = y;
     };
+    on(small, "change", () => nav.classList.remove("is-hidden"));
     onScroll();
     on(window, "scroll", onScroll, { passive: true });
 

@@ -137,6 +137,16 @@ export default function Navbar() {
           </text>
         </svg>
       </div>
+      {/* Phones and small tablets: booking bar pinned to the bottom of the screen (like Hyatt's mobile bar) */}
+      <div className="book-bar">
+        <span className="book-bar__name">
+          {hotel.name}
+          <small>Best rate, no booking fees</small>
+        </span>
+        <a href="#" className="book-bar__btn" data-open-modal>
+          Book
+        </a>
+      </div>
     </>
   );
 }

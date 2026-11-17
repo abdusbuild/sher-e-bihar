@@ -1061,7 +1061,7 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .title { margin-bottom: clamp(28px, 4vw, 48px); }
 .title .uline, .modal .uline { display: none; }
 .title p { margin-top: 14px; }
-.subhead, .intro h1, .showcase__body h3 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.4rem, 2.2vw, 26px); line-height: 1.2; color: var(--navy); text-transform: none; letter-spacing: normal; }
+.subhead, .intro .intro__title, .showcase__body h3 { font-family: var(--f-display); font-weight: 600; font-size: clamp(1.4rem, 2.2vw, 26px); line-height: 1.2; color: var(--navy); text-transform: none; letter-spacing: normal; }
 .subhead { margin-bottom: 10px; }
 .kicker, .showcase__tag { font-family: var(--f-display); font-size: 13px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: var(--amber-700); }
 .contact-title .sub { text-transform: none; }
@@ -1146,7 +1146,7 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 
 /* Home intro */
 .intro { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(32px, 7vw, 100px); }
-.intro h1 { margin-bottom: 16px; font-size: clamp(1.6rem, 2.7vw, 34px); }
+.intro .intro__title { margin-bottom: 16px; font-size: clamp(1.6rem, 2.7vw, 34px); }
 .intro p { max-width: 600px; }
 .intro .kicker { margin-bottom: 12px; }
 .intro-stats { display: flex; flex-wrap: wrap; gap: 16px clamp(24px, 4vw, 48px); margin: 26px 0 28px; padding-top: 22px; border-top: 1px solid var(--line); }
@@ -1430,9 +1430,9 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 /* Aboreto ships one weight; keep headings at 400 so the browser never fakes bold */
 h1, h2, h3, h4,
 .title h2, .sec-head h2, .contact-title h2, .room-detail h2, .rotator-title, .places h2, .getting h2, .modal h2, .not-found h1, .page-hero h1, .hero h1,
-.subhead, .intro h1, .showcase__body h3, .perks h2, .testi-card__name { font-weight: 400; }
+.subhead, .intro .intro__title, .showcase__body h3, .perks h2, .testi-card__name { font-weight: 400; }
 .title h2, .sec-head h2, .contact-title h2, .room-detail h2, .rotator-title, .places h2, .getting h2, .modal h2, .not-found h1, .page-hero h1 { letter-spacing: 3px; }
-.subhead, .intro h1, .showcase__body h3 { letter-spacing: 1px; }
+.subhead, .intro .intro__title, .showcase__body h3 { letter-spacing: 1px; }
 
 /* UI text in the body font (Jost): buttons, nav, small labels */
 .btn-white, .btn-outline, .btn-black, .btn-gold, .btn-gradient, .btn-outline-amber, .btn-submit, .pill, .navbar__book,
@@ -1520,7 +1520,7 @@ h1, h2, h3, h4,
   /* Headings: Aboreto is very wide, so ease the tracking and give lines room */
   .sec-head h2, .title h2, .contact-title h2, .room-detail h2, .rotator-title, .places h2, .getting h2, .not-found h1 { font-size: 1.5rem; letter-spacing: 1.5px; line-height: 1.35; }
   .page-hero h1 { font-size: 1.85rem; letter-spacing: 2px; line-height: 1.3; }
-  .subhead, .intro h1, .showcase__body h3 { font-size: 1.2rem; line-height: 1.4; }
+  .subhead, .intro .intro__title, .showcase__body h3 { font-size: 1.2rem; line-height: 1.4; }
 
   /* Lists, cards, carousels */
   .amen { gap: 22px 16px; }
@@ -1645,12 +1645,13 @@ html { font-synthesis-weight: none; }
 .footer__dir, .footer__acc-btn, .contact-box__info .lbl, p.lbl { font-weight: 400; }
 
 /* Body copy: one size everywhere */
-main p:not(.note):not(.lbl):not(.photo-credits):not(.faq-aside__text):not(.lead):not(.is-short):not(.page-hero__sub),
+main p:not(.note):not(.lbl):not(.photo-credits):not(.faq-aside__text):not(.lead):not(.is-short):not(.page-hero__sub):not(.amen__item p),
 main .check-list li { font-size: 1.0625rem; line-height: 1.65; }
 /* Jost 300 is too thin for reading text */
 p.sub, p.val, a.val.dir { font-weight: 400; }
 
 /* Small / meta text */
+.amen__item p { font-size: .9375rem; }
 .footer__brand p, .footer__addr, .footer__cols li, .footer__cols a, .peek__slide figcaption, .videos__item figcaption { font-size: .9375rem; }
 
 /* Labels and captions: never below 12px on phones */
@@ -1666,3 +1667,64 @@ p.sub, p.val, a.val.dir { font-weight: 400; }
    headings (no faux bold); distances use Jost's real 600 weight */
 .places__list b { -webkit-text-stroke: .04em currentColor; }
 .places__list span { font-weight: 600; color: var(--ink); }
+
+/* Home intro on phones: photo first and full width, one paragraph, balanced heading lines.
+   Keeps the opening block to about one screen instead of a wall of text. */
+@media (max-width: 600px) {
+  .intro .leaf { order: -1; justify-self: stretch; width: 100%; aspect-ratio: 4 / 3; }
+  .intro .intro__more { display: none; }
+  .intro .intro__title { font-size: 1.125rem; letter-spacing: .5px; line-height: 1.45; text-wrap: balance; }
+  .intro-stats { margin: 20px 0 22px; padding-top: 18px; }
+}
+
+/* Hero video pause/play (WCAG 2.2.2: moving content longer than 5s needs a pause control) */
+.hero__toggle { position: absolute; top: 16px; right: 16px; z-index: 3; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; padding: 0; color: #fff; background: rgba(21, 13, 56, .55); border: 1px solid rgba(255, 255, 255, .55); cursor: pointer; -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); transition: background .2s, transform .2s; }
+.hero__toggle:hover { background: rgba(21, 13, 56, .85); transform: scale(1.06); }
+.hero__toggle:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.hero__toggle svg { width: 16px; height: 16px; fill: currentColor; }
+@media (max-width: 600px) { .hero__toggle { top: 12px; right: 12px; width: 38px; height: 38px; } }
+@media (prefers-reduced-motion: reduce) { .hero__toggle { display: none; } }
+
+/* Phones: navbar hides on scroll down, returns on scroll up (class set in SiteScripts). The later
+   `.navbar` rule only transitions the colour, so the slide transition is added back here. */
+.navbar { transition: transform .3s ease, background-color .15s ease-in-out, box-shadow .3s ease; will-change: transform; }
+.navbar.is-hidden { transform: translateY(-100%); box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .navbar { transition: none; } }
+
+/* Phones and small tablets: Book bar pinned to the bottom (always visible), Enquire button sits just above it.
+   The top navbar's Book button is hidden there so there's only one. */
+.book-bar { display: none; }
+@media (max-width: 860px) {
+  :root { --bookbar-h: 68px; }
+  .book-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 85; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: var(--bookbar-h); padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--navy); color: #fff; box-shadow: 0 -12px 24px -18px rgba(0, 0, 0, .7); }
+  .book-bar__name { min-width: 0; font-family: var(--f-display); font-size: .95rem; letter-spacing: .12em; text-transform: uppercase; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .book-bar__name small { display: block; margin-top: 3px; font-family: var(--f-body); font-size: .75rem; letter-spacing: .04em; text-transform: none; color: var(--gold); }
+  .book-bar__btn { flex-shrink: 0; padding: 12px 28px 11px; background: #fff; color: var(--navy); border-radius: var(--radius-sm); font-family: var(--f-body); font-size: .9rem; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; transition: background .2s; }
+  .book-bar__btn:hover, .book-bar__btn:focus-visible { background: var(--gold-hover); }
+  .book-bar__btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  .navbar__book { display: none; }
+  body { padding-bottom: calc(var(--bookbar-h) + env(safe-area-inset-bottom)); }
+  .enquire-fab { bottom: calc(var(--bookbar-h) + 12px + env(safe-area-inset-bottom)); }
+  .enquire-panel { bottom: calc(var(--bookbar-h) + 74px + env(safe-area-inset-bottom)); }
+  .footer__bottom { padding-bottom: 76px; }
+  .menu-open .book-bar { display: none; }
+}
+
+/* Hero one-liner: the page's <h1>, centred on the video. A soft radial shade sits only behind the text
+   so the film keeps its brightness. Old `.hero h1` rules exist above, so every property is set here. */
+.hero__copy { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px var(--pad); text-align: center; color: #fff; pointer-events: none; background: radial-gradient(ellipse 65% 50% at 50% 50%, rgba(21, 13, 56, .5), rgba(21, 13, 56, .2) 60%, rgba(21, 13, 56, 0) 85%); }
+.hero__copy .hero__title { margin: 0; max-width: 22ch; font-family: var(--f-display); font-weight: 400; font-size: clamp(2rem, 5.4vw, 4.4rem); line-height: 1.1; letter-spacing: .06em; text-transform: uppercase; color: #fff; -webkit-text-stroke: .045em currentColor; text-shadow: 0 2px 18px rgba(0, 0, 0, .45); text-wrap: balance; animation: heroCopyIn .9s ease-out both; }
+.hero__copy .hero__tagline { margin: 16px 0 0; font-family: var(--f-body); font-weight: 500; font-size: clamp(.8rem, 1.4vw, 1rem); letter-spacing: .22em; text-transform: uppercase; color: var(--gold-hover); text-shadow: 0 1px 8px rgba(0, 0, 0, .6); text-wrap: balance; animation: heroCopyIn .9s .15s ease-out both; }
+@keyframes heroCopyIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .hero__copy .hero__title, .hero__copy .hero__tagline { animation: none; } }
+/* Phones: the hero fills exactly the screen left between the top navbar and the bottom Book bar */
+@media (max-width: 600px) {
+  .hero { height: calc(100svh - 64px - var(--bookbar-h, 68px)); min-height: 420px; }
+  .hero__copy .hero__title { font-size: clamp(1.9rem, 9vw, 2.6rem); max-width: 12ch; }
+  .hero__copy .hero__tagline { font-size: .78rem; letter-spacing: .16em; }
+}
+
+/* Photo frames that hold the auto slider (home intro, book-direct band): the view fills the frame's own shape */
+:is(.leaf, .media-split__img).slider .slider__view { aspect-ratio: auto; height: 100%; border-radius: 4px; }
+/* Home intro slider has no position bars, so it doesn't need the dark fade they sat on */
+.leaf.slider .slider__view::after { content: none; }
