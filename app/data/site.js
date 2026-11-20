@@ -19,6 +19,8 @@ export const hotel = {
   mapEmbed: "https://maps.google.com/maps?q=24.5745394,84.7776647&z=15&output=embed",
   // From the Google Maps listing ("Hotel Sher-E-Bihar"), checked Oct 2026
   rating: { value: 3.7, count: 437, source: "Google" },
+  // Print brochure (A4 landscape PDF) in public/brochure/
+  brochure: { href: "/brochure/Hotel-Sher-e-Bihar-Brochure.pdf", size: "8 MB" },
   checkIn: "11:00 AM",
   checkOut: "11:00 AM",
   frontDesk: "Front desk open 24 hours", // TODO: confirm

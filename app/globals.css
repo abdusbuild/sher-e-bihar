@@ -1757,3 +1757,11 @@ p.sub, p.val, a.val.dir { font-weight: 400; }
 .footer .socials-brand a:hover { color: #fff; transform: translateY(-3px); filter: brightness(1.08); box-shadow: 0 8px 18px -8px rgba(0, 0, 0, .7); }
 .footer .socials-brand a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 .footer .socials-brand .ico { width: 20px; height: 20px; }
+
+/* Brochure download link (BookDirect band, banquet page) */
+.brochure-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 18px; font-size: 15px; font-weight: 500; color: #fff; text-decoration: underline; text-decoration-color: rgba(255,255,255,.4); text-underline-offset: 4px; transition: text-decoration-color .2s; }
+.brochure-link:hover { text-decoration-color: currentColor; }
+.brochure-link .ico { width: 18px; height: 18px; }
+.brochure-link span { opacity: .7; font-weight: 400; }
+.brochure-link--ink { color: var(--ink); text-decoration-color: rgba(0,0,0,.25); }
+.btns-center .brochure-link { display: flex; justify-content: center; }

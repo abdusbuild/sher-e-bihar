@@ -65,6 +65,12 @@ export default function Footer() {
                 </span>
               </li>
               <li>
+                <a href={hotel.brochure.href} download>
+                  <Icon name="download" />
+                  Download brochure (PDF)
+                </a>
+              </li>
+              <li>
                 <a href="#" data-open-modal>
                   <Icon name="calendar" />
                   Booking enquiry

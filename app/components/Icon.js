@@ -4,6 +4,7 @@ const paths = {
   menu: "M4 7h16M4 12h16M4 17h16",
   prev: "M15 6l-6 6 6 6",
   next: "M9 6l6 6-6 6",
+  download: "M12 4v11 M7 10l5 5 5-5 M5 20h14",
   zoomIn: "M11 4a7 7 0 1 0 0 14a7 7 0 1 0 0-14z M20 20l-4-4 M8 11h6 M11 8v6",
   zoomOut: "M11 4a7 7 0 1 0 0 14a7 7 0 1 0 0-14z M20 20l-4-4 M8 11h6",
   chevron: "M6 9l6 6 6-6",

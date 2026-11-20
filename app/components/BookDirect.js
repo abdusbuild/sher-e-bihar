@@ -28,6 +28,9 @@ export default function BookDirect() {
               <Icon name="whatsapp" /> WhatsApp
             </a>
           </div>
+          <a href={hotel.brochure.href} download className="brochure-link">
+            <Icon name="download" /> Download our brochure <span>(PDF, {hotel.brochure.size})</span>
+          </a>
         </div>
         <div className="media-split__img media-split__img--tall framed slider reveal" style={{ "--d": ".15s" }} data-slider>
           <div className="slider__view" role="group" aria-label="Hotel photos">

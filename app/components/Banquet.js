@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { banquet } from "../data/site";
+import { banquet, hotel } from "../data/site";
 import Icon from "./Icon";
 import Photo from "./Photo";
 import Title from "./Title";
@@ -93,6 +93,9 @@ export default function Banquet({ teaser = false }) {
         <div className="center reveal btns-center" style={{ marginTop: 34 }}>
           {banquet.capacity && <p className="small-note">Capacity: {banquet.capacity}</p>}
           <EnquireEvent />
+          <a href={hotel.brochure.href} download className="brochure-link brochure-link--ink">
+            <Icon name="download" /> Download our brochure <span>(PDF, {hotel.brochure.size})</span>
+          </a>
         </div>
       </div>
     </section>
