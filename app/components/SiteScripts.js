@@ -502,7 +502,7 @@ export default function SiteScripts() {
       const lbImg = $("img", lb);
       const lbCap = $(".lightbox__cap", lb);
       const lbCount = $(".lightbox__count", lb);
-      const zoomable = "[data-lightbox], .img-marquee img, .media-split__img img, .showcase__img img, .room-detail__tile img, .peek__img img, .slider__slide img, .dine__img img, .dish__img img, .arch img";
+      const zoomable = "[data-lightbox], .img-marquee img, .media-split__img img, .showcase__img img, .room-detail__tile img, .peek__img img, .slider__slide img, .dine__img img, .dine__dish img, .dish__img img, .arch img";
       const srcOf = (el) => el.getAttribute("href") || el.dataset.full || el.currentSrc || el.getAttribute("src");
       const capOf = (el) => el.getAttribute("data-caption") || el.getAttribute("alt") || "";
       // Gallery links count once (not the <img> inside them); filtered-out gallery items are skipped.

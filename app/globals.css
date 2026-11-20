@@ -1230,6 +1230,23 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .dine .kicker { margin-bottom: 14px; }
 .dine__img { aspect-ratio: 16/10; overflow: hidden; border-radius: var(--radius); }
 .dine__img > :is(img, .ph) { width: 100%; height: 100%; object-fit: cover; object-position: 78% center; cursor: zoom-in; }
+/* Home teaser: signature dishes as the main visual (three equal tiles in a row), restaurant hall as a short, wide photo under them */
+.dine__media { min-width: 0; }
+.dine__dishes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(10px, 1.4vw, 16px); }
+.dine__dish { position: relative; margin: 0; aspect-ratio: 3/4; overflow: hidden; border-radius: var(--radius); background: var(--sand); box-shadow: var(--shadow); }
+.dine__dish > :is(img, .ph) { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+.dine__dish figcaption { position: absolute; inset: auto 0 0; padding: 40px 14px 14px; background: linear-gradient(transparent, rgba(0, 0, 0, .78)); color: #fff; pointer-events: none; }
+.dine__dish figcaption strong { display: block; font-family: var(--f-display); font-size: clamp(14px, 1.4vw, 18px); letter-spacing: .04em; border-left: 3px solid var(--gold); padding-left: 10px; }
+.dine__dish figcaption span { display: none; }
+.dine__media .photo-credits { margin-top: 10px; }
+.dine__hall { position: relative; margin: clamp(10px, 1.4vw, 16px) 0 0; }
+.dine__hall .dine__img { aspect-ratio: 3/1; }
+.dine__hall .dine__img > img { object-position: center 60%; }
+.dine__hall figcaption { position: absolute; left: 14px; bottom: 12px; padding: 4px 10px; border-radius: var(--radius-sm); background: rgba(0, 0, 0, .6); color: #fff; font-size: 13px; pointer-events: none; }
+@media (max-width: 560px) {
+  .dine__dish figcaption { padding: 28px 8px 10px; }
+  .dine__dish figcaption strong { font-size: 12px; padding-left: 7px; border-left-width: 2px; }
+}
 .showcase__meta { gap: 6px 8px; }
 .showcase__meta li { padding: 4px 10px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-sm); font-size: .8rem; }
 
@@ -1479,8 +1496,8 @@ h1, h2, h3, h4,
 .gallery__item:hover img, .showcase:hover img { transform: scale(1.05); }
 /* Every other content photo zooms a touch under the mouse (not on touch screens, not with reduced motion) */
 @media (hover: hover) and (prefers-reduced-motion: no-preference) {
-  :is(.peek__img, .dish__img, .media-split__img:not(.framed), .room-detail__tile, .dine__img, .slider__slide) > img { transition: transform .7s var(--ease-nb); }
-  :is(.peek__img, .dish__img, .media-split__img:not(.framed), .room-detail__tile, .dine__img, .slider__slide):hover > img { transform: scale(1.04); }
+  :is(.peek__img, .dish__img, .media-split__img:not(.framed), .room-detail__tile, .dine__img, .dine__dish, .slider__slide) > img { transition: transform .7s var(--ease-nb); }
+  :is(.peek__img, .dish__img, .media-split__img:not(.framed), .room-detail__tile, .dine__img, .dine__dish, .slider__slide):hover > img { transform: scale(1.04); }
 }
 
 /* Page-hero title drops in on load */
