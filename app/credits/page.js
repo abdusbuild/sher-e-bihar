@@ -17,12 +17,12 @@ export default function Credits() {
       <section className="section">
         <div className="wrap legal-body" style={{ maxWidth: 760 }}>
           <p>
-            The photos of the hotel, rooms, restaurant and banquet hall on this website are our own. The dish photos on
-            the Dining page are stock photos from Wikimedia Commons, shown for illustration. They have been resized and
+            The photos of the hotel, rooms, restaurant and banquet hall on this website are our own. Some of the dish
+            photos on the Dining page are stock photos from Wikimedia Commons, shown for illustration. They have been resized and
             are used under the licences below.
           </p>
           <ul>
-            {restaurant.dishes.map((d) => (
+            {restaurant.dishes.filter((d) => d.credit).map((d) => (
               <li key={d.title}>
                 <a href={d.credit.page} target="_blank" rel="noopener noreferrer">
                   {d.title.split(" & ")[0]}

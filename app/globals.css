@@ -1276,8 +1276,6 @@ h1, h2, h3, h4 { font-family: var(--f-display); font-weight: 600; }
 .page-hero__bg img[data-full="/images/room-family-5.jpg"] { object-position: center 72%; }
 /* Banquet stage: skip the bare ceiling, frame chandeliers + full décor wall */
 .page-hero__bg img[data-full="/images/banquet-stage-2.jpg"] { object-position: center 68%; }
-/* Dining hero: keep the paneer bowl and rotis in frame */
-.page-hero__bg img[data-full="/images/food-kadhai-paneer.jpg"] { object-position: center 40%; }
 /* Full-photo banner (About): taller, whole picture shown, blurred copy behind */
 .page-hero--full { height: clamp(460px, 78vh, 680px); }
 .page-hero--full .page-hero__bg img { position: absolute; inset: 0; object-fit: contain; object-position: center; }
@@ -1623,9 +1621,11 @@ h1, h2, h3, h4, .subhead, .rotator-title { -webkit-text-stroke: .035em currentCo
   .card-loop__track > .card { padding: 24px 16px; }
 }
 
-/* About hero: 3-photo collage, wide version on landscape screens, stacked version on phones */
+/* About and Dining heroes: 3-photo collage, wide version on landscape screens, stacked version on phones */
 .page-hero--collage .page-hero__bg picture img { object-fit: cover; object-position: center 20%; }
 @media (max-aspect-ratio: 1/1) { .page-hero--collage .page-hero__bg picture img { object-position: center top; } }
+/* Dining hero collage: normal banner height, so keep the bowls centred */
+.page-hero--collage .page-hero__bg img[data-full="/images/dining-collage-v3-mobile.jpg"] { object-position: center; }
 
 /* Brand crest (from the hotel's logo) in place of the old "SB" box */
 .logo-mark.logo-mark--crest { width: auto; height: 66px; aspect-ratio: 632 / 560; background: none; border-radius: 0; padding: 0; }

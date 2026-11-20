@@ -199,9 +199,10 @@ export const inEveryRoom = [
 
 export const restaurant = {
   text: "Our ground-floor restaurant serves fresh, home-style food all day — hot breakfasts, North Indian thalis, Bihari favourites and quick meals for travellers in a hurry. Open to hotel guests and walk-in diners alike.",
-  // Dishes guests mention in Google reviews. TODO: owner to confirm / add the full menu.
-  // The dish photos are stock photos from Wikimedia Commons, not taken at the hotel: `credit` is listed on /credits,
-  // which /dining links to (the licences require it). TODO: replace them with photos of our own food and drop the credits.
+  // Dishes without a `credit` are real photos from our kitchen, taken from the hotel's Google Maps "Food & drink" photos
+  // (originals in originals/food-review, git-ignored). TODO: owner to confirm the dish names and add the full menu.
+  // Dishes with a `credit` use stock photos from Wikimedia Commons: their licences require the credit, which /credits
+  // lists and /dining links to. TODO: replace those with photos of our own food and drop their credits.
   dishes: [
     {
       title: "Kadhai Chicken",
@@ -234,10 +235,34 @@ export const restaurant = {
       credit: { by: "Babu iyer", page: "https://commons.wikimedia.org/wiki/File:Onion_pakora_-_a.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0" },
     },
     {
-      title: "Lassi & Chaach",
-      text: "Cool, fresh lassi and spiced chaach to beat the heat.",
-      image: "/images/food-lassi.jpg",
-      credit: { by: "Jashjashjash", page: "https://commons.wikimedia.org/wiki/File:KulladLassi-StreetFood-DelhiNCR11.jpg", licence: "CC BY-SA 4.0", licenceUrl: "https://creativecommons.org/licenses/by-sa/4.0" },
+      title: "Tandoori Chicken",
+      text: "A whole chicken roasted in the tandoor, served with mint chutney and a fresh garnish.",
+      image: "/images/food-tandoori-chicken.jpg",
+    },
+    {
+      title: "Paneer Tikka",
+      text: "Paneer, capsicum, onion and tomato, charred in the tandoor and served with green chutney.",
+      image: "/images/food-paneer-tikka.jpg",
+    },
+    {
+      title: "Nargisi Kofta",
+      text: "Boiled eggs wrapped in spiced keema and fried crisp, served with mint chutney.",
+      image: "/images/food-nargisi-kofta.jpg",
+    },
+    {
+      title: "Chilli Chicken",
+      text: "Crispy chicken tossed in a hot, glossy Indo-Chinese chilli sauce.",
+      image: "/images/food-chilli-chicken.jpg",
+    },
+    {
+      title: "Keema Masala",
+      text: "Slow-cooked minced meat in a rich masala, finished with cream.",
+      image: "/images/food-keema-masala.jpg",
+    },
+    {
+      title: "Garden Fresh Salad",
+      text: "Cucumber, tomato, onion and green chilli, plated fresh to go with every meal.",
+      image: "/images/food-garden-salad.jpg",
     },
   ],
   extras: ["Group meals for buses & travellers", "Room service for hotel guests", "Catering for banquet events"],

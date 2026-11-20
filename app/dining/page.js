@@ -11,7 +11,7 @@ import { hotel, restaurant } from "../data/site";
 export const metadata = pageMeta({
   title: "Restaurant on GT Road",
   description:
-    "Home-style Indian restaurant on NH-19 at Sherghati: kadhai chicken, dal tadka, paneer, tandoori roti, pakodas and chai. Open to guests, walk-ins and bus groups.",
+    "Home-style Indian restaurant on NH-19 at Sherghati: tandoori chicken, paneer tikka, kadhai chicken, dal tadka, tandoori roti, pakodas and chai. Open to guests, walk-ins and bus groups.",
   path: "/dining",
   image: "/og/dining-v3.jpg",
 });
@@ -20,7 +20,12 @@ export default function Dining() {
   return (
     <>
       <JsonLd data={breadcrumbLd("Dining", "/dining")} />
-      <PageHero title="Dining" sub="Fresh, home-style food all day" image="/images/food-kadhai-paneer.jpg" />
+      <PageHero
+        title="Dining"
+        sub="Fresh, home-style food all day"
+        image="/images/dining-collage-v3-mobile.jpg"
+        desktopImage="/images/dining-collage-v3.jpg"
+      />
       <Restaurant />
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="wrap">
@@ -37,7 +42,7 @@ export default function Dining() {
             ))}
           </div>
           <p className="photo-credits reveal">
-            Dish photos are for illustration. <Link href="/credits">Photo credits</Link>
+            Some dish photos are for illustration. <Link href="/credits">Photo credits</Link>
           </p>
           <div className="dining-info reveal">
             <div className="dining-info__box">
